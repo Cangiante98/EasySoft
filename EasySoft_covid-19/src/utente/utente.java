@@ -1,10 +1,11 @@
 package utente;
 
 public class utente {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	String nome;
+	String cognome;
+	String codFiscale;
+	
+	public utente(){
+		
 	}
-
 }
