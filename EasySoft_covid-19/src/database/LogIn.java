@@ -1,8 +1,8 @@
 package database;
 
-public class Login {
+public class LogIn {
 
-	public Login() {
+	public LogIn() {
 		// TODO Auto-generated constructor stub
 	}
 
