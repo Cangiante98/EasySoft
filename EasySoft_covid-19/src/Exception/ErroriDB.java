@@ -15,7 +15,9 @@ public class ErroriDB {
 	public static final String INCORRECT_PASSWORD = "ERROR: Password non corretta!";
 	public static final String FILETTATURA_NOT_FOUND = "ERROR: Metrica non trovata!";
 	public static final String EMPTY_LIST = "ERROR: Tabella vuota!";
-	
+	public static final String PERSONA_ALREADY_EXISTS = " ERROR: La persona è già stata registrata!";
+	public static final String MEDICO_ALREADY_EXISTS = " ERROR: Il medico è già stato registrato!";
+	public static final String LABANALISI_ALREADY_EXISTS = " ERROR: Il laboratorio analisi è già stato registrato!";
 	
 	public static final String USERNAME_ALREADY_EXISTS = "ERROR: Username già  esistente!";
 	public static final String USERNAME_NOT_ADMIN = "ERROR: Permessi di amministratore richiesti!";

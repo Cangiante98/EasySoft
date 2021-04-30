@@ -64,7 +64,7 @@ public class Utente {
 		return hashPassword;
 	}
 
-	public boolean isAdminFlag() {
+	public boolean isAdmin() {
 		return adminFlag;
 	}
 	
