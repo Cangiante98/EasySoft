@@ -20,14 +20,9 @@ public class UtilityUtente {
 	 * @see it.uniba.di.prog2.cs2021.gruppo31.Token#setHashPassword(String)
 	 * @see it.uniba.di.prog2.cs2021.gruppo31.database.LogIn_SignIn#checkUtente(String, String)
 	 */
-	public static void checkUtente(String username, String hashPassword) throws SQLException,AziendaException {
-		LogIn_SignIn login = ProxyDB.getIstance();
+	public static void checkUtente(String username, String hashPassword) throws SQLException,EasySoftException {
+		LogIn_SignIn login = (LogIn_SignIn) ProxyDB.getIstance();
 		login.checkUtente(username,hashPassword);
-		Token.getIstance().setHashPassword(hashPassword);
+		//Token.getIstance().setHashPassword(hashPassword);
 	}
-	public static Utente getUtente(String username) throws SQLException,AziendaException,ParseException {
-		LogIn_SignIn login = ProxyDB.getIstance();
-		return login.getUtente(username);
-	}
-
 }

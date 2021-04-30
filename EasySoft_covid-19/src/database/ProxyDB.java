@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Exception.*;
-import it.uniba.di.prog2.cs2021.gruppo31.database.ConnectorDB;
 import utente.Utente;
 
 public class ProxyDB {
@@ -26,6 +25,27 @@ public class ProxyDB {
 		
 		PreparedStatement ps = connector.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next() == false)
+		{
+			ps.close();
+			ConnectorDB.close(connector);
+			throw new EasySoftException(ErroriDB.USERNAME_NOT_FOUND);
+		}
+		
+		String tempUsername = rs.getString("USERNAME");
+		String tempPassword = rs.getString("HASH_PASSWORD");
+		
+		if(tempUsername.equals(username) && tempPassword.equals(hashPassword));
+		else
+		{
+			ps.close();
+			ConnectorDB.close(connector);
+			throw new EasySoftException(ErroriDB.INCORRECT_PASSWORD);
+		}
+		
+		ps.close();
+		ConnectorDB.close(connector);
 		
 		
 	}
