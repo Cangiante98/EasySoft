@@ -6,7 +6,7 @@ import java.text.ParseException;
 import Exception.*;
 import utente.Utente;
 
-public class LogIn {
+public class LogIn_SignIn {
 	/**
 	 * Interfaccia utilizzata dal package utente per LogIn e SignIn.
 	 * @author matteo
