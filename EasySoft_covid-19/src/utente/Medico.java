@@ -1,10 +1,22 @@
 package utente;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 public class Medico{
 	private String nome;
 	private String cognome;
 	private String email;
+	private Date dataNascita;
 	
+	public Date getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(Date dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
 	//Costruttori
 	public Medico(){
 		this.nome = "NESSUN NOME";
@@ -51,6 +63,12 @@ public class Medico{
 	
 	public String getEmail() {
 		return this.email;
+	}
+	@Override
+	public String toString() {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		String s = "Nome: " + nome + "\nCognome: " + cognome + "\nData Nascita: " + formatter.format(dataNascita);
+		return s;
 	}
 	
 }

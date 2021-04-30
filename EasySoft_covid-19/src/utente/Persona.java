@@ -10,7 +10,7 @@ public class Persona{
 	public Persona(){
 		this.nome = "NESSUN NOME";
 		this.cognome = "NESSUN COGNOME";
-		this.codiceFiscale = "0000000000";
+		this.codiceFiscale = "0000000000000000";
 		this.telefono = "+39" + "0000000000";
 	}
 	

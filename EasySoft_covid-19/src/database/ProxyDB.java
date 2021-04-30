@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Exception.*;
+import Exception.*; 
 import utente.Utente;
 
 public class ProxyDB {
@@ -49,7 +49,11 @@ public class ProxyDB {
 		
 		
 	}
-	public void addUtente(Utente utente) throws SQLException,EasySoftException {
-		
+	/**
+	 * {@inheritDoc}
+	 */
+	public void addUtente(Utente utente) throws SQLException,EasySoftException{
+		query = "INSERT INTO IMPIEGATO(NOME,COGNOME,DATA_NASCITA,MANSIONE,STIPENDIO,MAX_VENDITE_ANNO,DATA_ENTRATA) VALUES (?,?,?,?,?,?,?);";
+		connector = ConnectorDB.connect();
 	}
 }
