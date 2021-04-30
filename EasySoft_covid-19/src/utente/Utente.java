@@ -82,6 +82,7 @@ public class Utente {
 	public void addUtente() throws SQLException,EasySoftException {
 		LogIn_SignIn login =(LogIn_SignIn) ProxyDB.getIstance();
 		login.addUtente(this);
+		//Token.getInstance();
 	}
 	
 }

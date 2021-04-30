@@ -5,13 +5,16 @@ public class Persona{
 	private String cognome;
 	private String codiceFiscale;
 	private String telefono;
+	private boolean flag = false;
 	
 	//Costruttori
 	public Persona(){
 		this.nome = "NESSUN NOME";
 		this.cognome = "NESSUN COGNOME";
 		this.codiceFiscale = "0000000000000000";
-		this.telefono = "+39" + "0000000000";
+		this.telefono = "39" + "0000000000";
+		this.flag= true;
+		
 	}
 	
 	public Persona(String nomeIniziale, String cognomeIniziale, String codiceFiscaleIniziale, String telefonoIniziale) {
