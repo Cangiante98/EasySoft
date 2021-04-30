@@ -2,6 +2,8 @@ package database;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+
+//NOTA BENE: INTERFACCIA ADMIN_QUERY NON SO SE LA METTERO
 /**
  * Interfaccia amministratore.<br>
  * Contiene tutte le funzionalità  che un admin può eseguire sul database.
