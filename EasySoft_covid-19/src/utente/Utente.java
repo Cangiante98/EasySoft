@@ -80,7 +80,7 @@ public class Utente {
 	 * @see it.uniba.di.prog2.cs2021.gruppo31.database.ProxyDB#addUtente(Utente)
 	 */
 	public void addUtente() throws SQLException,EasySoftException {
-		LogIn_SignIn login =(LogIn_SignIn) ProxyDB.getIstance();
+		LogIn_SignIn login =ProxyDB.getIstance();
 		login.addUtente(this);
 		//Token.getInstance();
 	}

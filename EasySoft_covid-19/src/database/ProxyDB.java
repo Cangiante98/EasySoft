@@ -4,18 +4,31 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import Exception.*;
 import utente.Utente;
 
-public class ProxyDB {
+public class ProxyDB implements LogIn_SignIn,AdminQuery {
+	
 	private String query;
 	private Connection connector;
-	private static ProxyDB istance = new ProxyDB();
+	private static ProxyDB istance = new ProxyDB(); // Unica istanza di ProxyDB
 	
+	/**
+	 * Costruttore privato.<br>
+	 * L'oggetto può essere istanziato solo all'interno della classe stessa.
+	 */
 	private ProxyDB() {}
 	
+	/**
+	 * Restituisce l'unica istanza di ProxyDB.<br>
+	 * Il metodo è statico, quindi può essere invocato senza istanziare la classe.
+	 * Sull'oggetto ProxyDB è possibile poi eseguire tutti i metodi relativi allo 
+	 * specifico tipo di utente (user o admin).
+	 * @return Istanza di ProxyDB.
+	 */
 	public static ProxyDB getIstance() {
 		return istance;
 	}
@@ -54,7 +67,7 @@ public class ProxyDB {
 	 * {@inheritDoc}
 	 */
 	public void addUtente_Persona(Utente utente) throws SQLException,EasySoftException{
-		query = "INSERT INTO IMPIEGATO(NOME,COGNOME,CODICEFISCALE,TELEFONO) VALUES (?,?,?,?);";
+		query = "INSERT INTO PERSONA(NOME,COGNOME,CODICEFISCALE,TELEFONO) VALUES (?,?,?,?);";
 		connector = ConnectorDB.connect();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		PreparedStatement ps = connector.prepareStatement(query);
@@ -194,5 +207,17 @@ public class ProxyDB {
 		}
 		ps.close();
 		ConnectorDB.close(connector);
+	}
+
+	@Override
+	public void addUtente(Utente utente) throws SQLException, EasySoftException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Utente getUtente(String username) throws SQLException, EasySoftException, ParseException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -116,6 +116,7 @@ public class UtilityUtente {
 	 */
 	private static boolean checkCodiceFiscale(String codicefiscale) {
 		return false;
+		
 		//da implementare
 		//lunghezza consentita 16 caratteri
 		//controlli sulla posizione delle lettere e dei numeri
