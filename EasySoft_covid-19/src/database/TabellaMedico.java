@@ -9,7 +9,7 @@ public class TabellaMedico {
 	/**
 	 * Crea la tabella Medico se non esiste già
 	 */
-	public void creaTabellaMedico() {
+	public static void creaTabellaMedico() {
 		
 		try {
 			// caricamento del driver

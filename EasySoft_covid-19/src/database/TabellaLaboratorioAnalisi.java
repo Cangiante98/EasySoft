@@ -13,7 +13,7 @@ public class TabellaLaboratorioAnalisi {
 	/**
 	 * Crea la tabella laboratorioAnalisi se non esiste già
 	 */
-	public void creaTabellaLabAnalisi() {
+	public static void creaTabellaLabAnalisi() {
 		
 		try {
 			// caricamento del driver

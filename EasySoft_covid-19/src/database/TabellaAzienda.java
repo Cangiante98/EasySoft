@@ -14,7 +14,7 @@ public class TabellaAzienda {
 	/**
 	 * Crea la tabella azienda se non esiste già
 	 */
-	public void creaTabellaAzienda() {
+	public static void creaTabellaAzienda() {
 		
 		try {
 			// caricamento del driver
