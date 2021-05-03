@@ -165,13 +165,16 @@ public class ProxyDB implements LogIn_SignIn,AdminQuery {
 	 * {@inheritDoc}
 	 */
 	public void addUtente_LabAnalisi(Utente utente) throws SQLException,EasySoftException{
-		query = "INSERT INTO LABANALISI(CODICE,HASHPASSWORD) VALUES (?,?);";
+		query = "INSERT INTO LABANALISI(PARTITAIVA, NOME, TELEFONO, EMAIL) VALUES (?,?,?,?);";
 		connector = ConnectorDB.connect();
 	
 		PreparedStatement ps = connector.prepareStatement(query);
 		
-		//ps.setString(1,utente.getLab_analisi().getCodice());
-		//ps.setString(2,utente.getLab_analisi().getHashPassword());
+		ps.setString(1,utente.getLab_analisi().getPartitaIva());
+		ps.setString(2,utente.getLab_analisi().getNome());
+		ps.setString(3,utente.getLab_analisi().getTelefono());
+		ps.setString(4,utente.getLab_analisi().getEmail());
+		
 		
 		try {
 			ps.executeUpdate();
