@@ -1,27 +1,19 @@
 package utente;
 
 public class Persona{
-	private String nome;
-	private String cognome;
-	private String codiceFiscale;
-	private String telefono;
+	private String nome; 			//max 20 caratteri
+	private String cognome;			//max 20 caratteri
+	private String codiceFiscale;	//esattamente 16 caratteri
+	private String telefono;		//esattamente 10 caratteri
 	private boolean flag = false;
 	
-	//Costruttori
-	public Persona(){
-		this.nome = "NESSUN NOME";
-		this.cognome = "NESSUN COGNOME";
-		this.codiceFiscale = "0000000000000000";
-		this.telefono = "39" + "0000000000";
-		this.flag= true;
-		
-	}
-	
-	public Persona(String nomeIniziale, String cognomeIniziale, String codiceFiscaleIniziale, String telefonoIniziale) {
-		this.nome = nomeIniziale;
-		this.cognome = cognomeIniziale;
-		this.codiceFiscale = codiceFiscaleIniziale;
-		this.telefono = "+39" + telefonoIniziale;
+	//Costruttore
+	public Persona(String nome, String cognome, String codiceFiscale, String telefono) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codiceFiscale = codiceFiscale;
+		this.telefono = "39" + telefono;
+		this.flag = true;
 	}
 	
 	
@@ -30,7 +22,7 @@ public class Persona{
 		this.nome = nome;
 		this.cognome = cognome;
 		this.codiceFiscale = codiceFiscale;
-		this.telefono = "+39" + telefono;
+		this.telefono = "39" + telefono;
 	}
 	
 	public void setNome(String nuovoNome) {

@@ -1,15 +1,15 @@
 package database;
 
 import java.sql.*;
-import utente.Persona;
+import utente.Medico;
 
-public class TabellaPersona {
+public class TabellaMedico {
 	private static Connection conn = null;
 	
 	/**
-	 * Crea la tabella persona se non esiste già
+	 * Crea la tabella Medico se non esiste già
 	 */
-	public static void creaTabellaPersona() {
+	public void creaTabellaMedico() {
 		
 		try {
 			// caricamento del driver
@@ -19,7 +19,7 @@ public class TabellaPersona {
 			conn = ConnectorDB.connect();
 			
 			// stringa contenete i comandi SQL
-			String comandoSQL ="CREATE TABLE IF NOT EXISTS Persona ("
+			String comandoSQL ="CREATE TABLE IF NOT EXISTS Medico ("
 									+ "CodiceFiscale 	CHAR(10) PRIMARY KEY, "
 									+ "Nome		  	VARCHAR(20) NOT NULL, "
 									+ "Cognome		VARCHAR(20) NOT NULL, "
@@ -41,12 +41,12 @@ public class TabellaPersona {
 	}
 
 	/**
-	 * Inserisce nella tabella la persona passata come parametro
-	 * Ritorna 1 se la persona è stata inserita correttamente, altrimenti 0
+	 * Inserisce nella tabella il Medico passato come parametro
+	 * Ritorna 1 se il Medico è stato inserito correttamente, altrimenti 0
 	 *  
-	 * @param personaInserita
+	 * @param medicoInserito
 	 */
-	public static int inserisciPersonaInTabella(Persona personaInserita) {
+	public static int inserisciMedicoInTabella(Medico medicoInserito) {
 		int verificaInserimento = 0;
 		
 		try {
@@ -56,18 +56,18 @@ public class TabellaPersona {
 			// crea una connessione al database "dbTamponi" usando credenziali di accesso appropriate.
 			conn = ConnectorDB.connect();
 			
-			Persona persona = personaInserita; 
+			Medico medico = medicoInserito; 
 			
 			
-			String comandoSQL = "INSERT INTO Persona(CodiceFiscale,Nome,Cognome,Telefono) "
-									+ "VALUES ('"+ persona.getCodiceFiscale() + "','" 
-												+ persona.getNome() + "','"
-												+ persona.getCognome() + "','"
-												+ persona.getTelefono() + "')";
+			String comandoSQL = "INSERT INTO Medico(CodiceFiscale,Nome,Cognome,Telefono) "
+									+ "VALUES ('"+ medico.getCodiceFiscale() + "','" 
+												+ medico.getNome() + "','"
+												+ medico.getCognome() + "','"
+												+ medico.getTelefono() + "')";
 			
 		
 			Statement istruzione = conn.createStatement();
-			//inserisce la persona nella tabella se non esiste già
+			//inserisce il medico nella tabella se non esiste già
 			//ritorna 1 se è stata inserita altrimenti 0
 			verificaInserimento = istruzione.executeUpdate(comandoSQL);
 			
@@ -83,12 +83,12 @@ public class TabellaPersona {
 	}
 	
 	/**
-	 * Cerca la persona con codicefiscale del parametro. Se la trova ritorna true altrimenti false
+	 * Cerca il medico con codicefiscale del parametro. Se lo trova ritorna true altrimenti false
 	 * @param codiceFiscale
 	 * @return
 	 */
-	public static boolean cercaPersonaInTabella(String codiceFiscale) {
-		boolean trovata = false;
+	public static boolean cercaMedicoInTabella(String codiceFiscale) {
+		boolean trovato = false;
 		try {
 			// caricamento del driver
 			new com.mysql.cj.jdbc.Driver();
@@ -100,7 +100,7 @@ public class TabellaPersona {
 			// chiede il numero di persona che hanno questo codice fiscale
 			// perciò sarà 0 oppure 1
 			String comandoSQL = "SELECT COUNT(*) "
-					      + "FROM Persona "
+					      + "FROM Medico "
 					      + "WHERE CodiceFiscale = '" + codiceFiscale + "';";
 			
 			//esegue il comando SQL
@@ -110,12 +110,12 @@ public class TabellaPersona {
 			
 			String stringaTrovata = null;
 			
-			//se viene trovata una persona con codice fiscale uguale sarà "1" altrimenti "0" (in string)
+			//se viene trovato un medico con codice fiscale uguale sarà "1" altrimenti "0" (in string)
 			while(risultato.next()) {
 			 stringaTrovata = risultato.getString(1);
 			}
 			
-			trovata = stringaTrovata.equals("1");// "trovata" sarà true se la stringa è "1", altrimenti false 
+			trovato = stringaTrovata.equals("1");// "trovato" sarà true se la stringa è "1", altrimenti false 
 			
 			// chiude connessione database
 			ConnectorDB.close(conn);
@@ -125,19 +125,19 @@ public class TabellaPersona {
 			e.printStackTrace();
 		}
 		
-		return trovata;
+		return trovato;
 	}
 	
 	/**
-	 * Modifica nel db gli attributi di una persona
-	 * @param personaModificata --> persona già MODIFICATA
-	 * @param codFiscaleVecchio --> è usato per indicare quale persona deve essere modificata
+	 * Modifica nel db gli attributi di un medico
+	 * @param medicoModificato --> medico già MODIFICATo
+	 * @param codFiscaleVecchio --> è usato per indicare quale medico deve essere modificato
 	 * N.B. il parametro codFiscaleVecchio deve essere il codice fiscale VECCHIO, altrimenti la modifica non avviene
 	 * Se si vuole modificare il codice fiscale bisogna inserire in codFiscaleVecchio il codice fiscale PRIMA della modifica
 	 * @return 1 se è stata inserita correttamente
 	 *		   0 altrimenti
 	 */
-	public static int modificaPersona(Persona personaModificata, String codFiscaleVecchio) {
+	public static int modificaMedico(Medico medicoModificato, String codFiscaleVecchio) {
 		int verificaInserimento = 0;
 		
 		try {
@@ -147,17 +147,17 @@ public class TabellaPersona {
 			// crea una connessione al database "dbTamponi" usando credenziali di accesso appropriate.
 			conn = ConnectorDB.connect();
 			
-			Persona persona = personaModificata;
+			Medico medico = medicoModificato;
 			
-			String comandoSQL = "UPDATE Persona "
-						  + "SET Nome = '" + persona.getNome() + "' "
-						  		+ ", Cognome = '" + persona.getCognome() + "' "
-						  		+ ", Telefono = '" + persona.getTelefono() + "' "
+			String comandoSQL = "UPDATE Medico "
+						  + "SET Nome = '" + medico.getNome() + "' "
+						  		+ ", Cognome = '" + medico.getCognome() + "' "
+						  		+ ", Telefono = '" + medico.getTelefono() + "' "
 						  + "WHERE CodiceFiscale = '" + codFiscaleVecchio + "'";
 			
 			Statement istruzione = conn.createStatement();
 			// carica il comando SQL
-			//ritorna 1 se è stata inserita altrimenti 0
+			//ritorna 1 se è stato inserito altrimenti 0
 			verificaInserimento = istruzione.executeUpdate(comandoSQL);
 			
 			// chiude connessione database
@@ -172,12 +172,12 @@ public class TabellaPersona {
 	}
 
 	/**
-	 * Elimina una persona dalla tabella prendendo come parametro la persona da eliminare
-	 * @param personaScelta
-	 * @return 1 se la persona è stata eliminata
+	 * Elimina un medico dalla tabella prendendo come parametro il medico da eliminare
+	 * @param medicoScelta
+	 * @return 1 se il medico è stato eliminato
 	 * 		   0 altrimenti
 	 */
-	public static int eliminaPersonaDaTabella(Persona personaScelta) {
+	public static int eliminaMedicoDaTabella(Medico medicoScelto) {
 		int verificaEliminazione = 0;
 		
 		try {
@@ -187,12 +187,12 @@ public class TabellaPersona {
 			// crea una connessione al database "dbTamponi" usando credenziali di accesso appropriate.
 			conn = ConnectorDB.connect();
 			
-			Persona persona = personaScelta;
+			Medico medico = medicoScelto;
 			
 			// stringa contenete i comandi SQL
 			String comandoSQL = "DELETE "
-					      + "FROM Persona "
-					      + "WHERE CodiceFiscale = '" + persona.getCodiceFiscale() + "';";
+					      + "FROM Medico "
+					      + "WHERE CodiceFiscale = '" + medico.getCodiceFiscale() + "';";
 			
 			
 			//esegue il comando SQL
@@ -210,7 +210,7 @@ public class TabellaPersona {
 		return verificaEliminazione;
 	}
 	
-	public static void stampaTabellaPersona() {
+	public static void stampaTabellaMedico() {
 		try {
 			// caricamento del driver
 			new com.mysql.cj.jdbc.Driver();
@@ -219,7 +219,7 @@ public class TabellaPersona {
 			conn = ConnectorDB.connect();
 			
 			String comandoSQL = "SELECT * "
-						  + "FROM Persona;";
+						  + "FROM Medico;";
 			
 		
 			Statement istruzione = conn.createStatement();
@@ -253,7 +253,7 @@ public class TabellaPersona {
 			conn = ConnectorDB.connect();
 			
 			// stringa contenete i comandi SQL
-			String comandoSQL ="DROP TABLE Persona;";
+			String comandoSQL ="DROP TABLE Medico;";
 		
 			
 			Statement istruzione = conn.createStatement();

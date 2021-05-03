@@ -1,13 +1,13 @@
 package utente;
 
-public class LabAnalisi {
+public class Azienda{
 	private String partitaIva;     	//max 11 caratteri
 	private String nome;			//max 20 caratteri
 	private String telefono;		//max 10 caratteri
 	private String email;   		//max 30 caratteri
 	
 	// costruttore
-	public LabAnalisi(String partitaIva, String nome, String telefono, String email) {
+	public Azienda(String partitaIva, String nome, String telefono, String email) {
 		this.partitaIva = partitaIva;
 		this.nome = nome;
 		this.telefono = telefono;
@@ -15,7 +15,7 @@ public class LabAnalisi {
 	}
 	
 	//reimposta laboratorio
-	public void setLaboratorioAnalisi(String partitaIva, String nome, String telefono, String email) {
+	public void setDatoreLavoro(String partitaIva, String nome, String telefono, String email) {
 		this.partitaIva = partitaIva;
 		this.nome = nome;
 		this.telefono = telefono;
@@ -55,5 +55,4 @@ public class LabAnalisi {
 	public String getEmail() {
 		return this.email;
 	}
-
 }

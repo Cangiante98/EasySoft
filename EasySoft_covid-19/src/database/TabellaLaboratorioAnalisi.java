@@ -1,15 +1,19 @@
 package database;
 
-import java.sql.*;
-import utente.Persona;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class TabellaPersona {
+import utente.LabAnalisi; 
+
+public class TabellaLaboratorioAnalisi {
 	private static Connection conn = null;
 	
 	/**
-	 * Crea la tabella persona se non esiste già
+	 * Crea la tabella laboratorioAnalisi se non esiste già
 	 */
-	public static void creaTabellaPersona() {
+	public void creaTabellaLabAnalisi() {
 		
 		try {
 			// caricamento del driver
@@ -19,11 +23,11 @@ public class TabellaPersona {
 			conn = ConnectorDB.connect();
 			
 			// stringa contenete i comandi SQL
-			String comandoSQL ="CREATE TABLE IF NOT EXISTS Persona ("
-									+ "CodiceFiscale 	CHAR(10) PRIMARY KEY, "
+			String comandoSQL ="CREATE TABLE IF NOT EXISTS LaboratorioAnalisi ("
+									+ "PartitaIva 	CHAR(11) PRIMARY KEY, "
 									+ "Nome		  	VARCHAR(20) NOT NULL, "
-									+ "Cognome		VARCHAR(20) NOT NULL, "
-									+ "Telefono		CHAR(12) NOT NULL "
+									+ "Telefono		CHAR(10) NOT NULL, "
+									+ "Email		VARCHAR(30) NOT NULL "
 									+ ");";
 		
 			
@@ -41,12 +45,12 @@ public class TabellaPersona {
 	}
 
 	/**
-	 * Inserisce nella tabella la persona passata come parametro
-	 * Ritorna 1 se la persona è stata inserita correttamente, altrimenti 0
+	 * Inserisce nella tabella il laboratorio passato come parametro
+	 * Ritorna 1 se il laboratorio è stato inserito correttamente, altrimenti 0
 	 *  
-	 * @param personaInserita
+	 * @param laboratorioInserito
 	 */
-	public static int inserisciPersonaInTabella(Persona personaInserita) {
+	public static int inserisciLaboratorioInTabella(LabAnalisi laboratorioInserito) {
 		int verificaInserimento = 0;
 		
 		try {
@@ -56,14 +60,14 @@ public class TabellaPersona {
 			// crea una connessione al database "dbTamponi" usando credenziali di accesso appropriate.
 			conn = ConnectorDB.connect();
 			
-			Persona persona = personaInserita; 
+			LabAnalisi laboratorio = laboratorioInserito; 
 			
 			
-			String comandoSQL = "INSERT INTO Persona(CodiceFiscale,Nome,Cognome,Telefono) "
-									+ "VALUES ('"+ persona.getCodiceFiscale() + "','" 
-												+ persona.getNome() + "','"
-												+ persona.getCognome() + "','"
-												+ persona.getTelefono() + "')";
+			String comandoSQL = "INSERT INTO LaboratorioAnalisi(PartitaIva,Nome,Telefono,Email) "
+									+ "VALUES ('"+ laboratorio.getPartitaIva() + "','" 
+												+ laboratorio.getNome() + "','"
+												+ laboratorio.getTelefono() + "','"
+												+ laboratorio.getEmail() + "');";
 			
 		
 			Statement istruzione = conn.createStatement();
@@ -72,7 +76,7 @@ public class TabellaPersona {
 			verificaInserimento = istruzione.executeUpdate(comandoSQL);
 			
 			// chiude connessione database
-						ConnectorDB.close(conn);
+			ConnectorDB.close(conn);
 			
 		}
 		catch (SQLException e) {
@@ -83,12 +87,12 @@ public class TabellaPersona {
 	}
 	
 	/**
-	 * Cerca la persona con codicefiscale del parametro. Se la trova ritorna true altrimenti false
-	 * @param codiceFiscale
+	 * Cerca il laboratorio con partitaIva del parametro. Se la trova ritorna true altrimenti false
+	 * @param partitaIva
 	 * @return
 	 */
-	public static boolean cercaPersonaInTabella(String codiceFiscale) {
-		boolean trovata = false;
+	public static boolean cercaLaboratorioInTabella(String partitaIva) {
+		boolean trovato = false;
 		try {
 			// caricamento del driver
 			new com.mysql.cj.jdbc.Driver();
@@ -97,11 +101,11 @@ public class TabellaPersona {
 			conn = ConnectorDB.connect();
 			
 			// stringa contenete i comandi SQL
-			// chiede il numero di persona che hanno questo codice fiscale
+			// chiede il numero di laboratori che hanno questa partitaIva
 			// perciò sarà 0 oppure 1
 			String comandoSQL = "SELECT COUNT(*) "
-					      + "FROM Persona "
-					      + "WHERE CodiceFiscale = '" + codiceFiscale + "';";
+					      + "FROM LaboratorioAnalisi "
+					      + "WHERE PartitaIva = '" + partitaIva + "';";
 			
 			//esegue il comando SQL
 			Statement istruzione = conn.createStatement();
@@ -110,12 +114,12 @@ public class TabellaPersona {
 			
 			String stringaTrovata = null;
 			
-			//se viene trovata una persona con codice fiscale uguale sarà "1" altrimenti "0" (in string)
+			//se viene trovato un laboratorio con partitaIva uguale sarà "1" altrimenti "0" (in string)
 			while(risultato.next()) {
 			 stringaTrovata = risultato.getString(1);
 			}
 			
-			trovata = stringaTrovata.equals("1");// "trovata" sarà true se la stringa è "1", altrimenti false 
+			trovato = stringaTrovata.equals("1");// "trovato" sarà true se la stringa è "1", altrimenti false 
 			
 			// chiude connessione database
 			ConnectorDB.close(conn);
@@ -125,19 +129,19 @@ public class TabellaPersona {
 			e.printStackTrace();
 		}
 		
-		return trovata;
+		return trovato;
 	}
 	
 	/**
-	 * Modifica nel db gli attributi di una persona
-	 * @param personaModificata --> persona già MODIFICATA
-	 * @param codFiscaleVecchio --> è usato per indicare quale persona deve essere modificata
-	 * N.B. il parametro codFiscaleVecchio deve essere il codice fiscale VECCHIO, altrimenti la modifica non avviene
-	 * Se si vuole modificare il codice fiscale bisogna inserire in codFiscaleVecchio il codice fiscale PRIMA della modifica
+	 * Modifica nel db gli attributi di un laboratorio
+	 * @param laboratorioModificato --> laboratorio già MODIFICATO
+	 * @param partitaIvaVecchia --> è usato per indicare quale laboratorio deve essere modificato
+	 * N.B. il parametro partitaIvaVecchia deve essere la partitaIva VECCHIA, altrimenti la modifica non avviene
+	 * Se si vuole modificare la partitaIva bisogna inserire in partitaIvaVecchia la partita iva PRIMA della modifica
 	 * @return 1 se è stata inserita correttamente
 	 *		   0 altrimenti
 	 */
-	public static int modificaPersona(Persona personaModificata, String codFiscaleVecchio) {
+	public static int modificaLaboratorio(LabAnalisi laboratorioModificato, String partitaIvaVecchia) {
 		int verificaInserimento = 0;
 		
 		try {
@@ -147,13 +151,13 @@ public class TabellaPersona {
 			// crea una connessione al database "dbTamponi" usando credenziali di accesso appropriate.
 			conn = ConnectorDB.connect();
 			
-			Persona persona = personaModificata;
+			LabAnalisi laboratorio = laboratorioModificato;
 			
-			String comandoSQL = "UPDATE Persona "
-						  + "SET Nome = '" + persona.getNome() + "' "
-						  		+ ", Cognome = '" + persona.getCognome() + "' "
-						  		+ ", Telefono = '" + persona.getTelefono() + "' "
-						  + "WHERE CodiceFiscale = '" + codFiscaleVecchio + "'";
+			String comandoSQL = "UPDATE LaboratorioAnalisi "
+						  + "SET Nome = '" + laboratorio.getNome() + "' "
+						  		+ ", Telefono = '" + laboratorio.getTelefono() + "' "
+						  		+ ",  Email= '" + laboratorio.getEmail() + "' "
+						  + "WHERE PartitaIva = '" + partitaIvaVecchia + "'";
 			
 			Statement istruzione = conn.createStatement();
 			// carica il comando SQL
@@ -172,12 +176,12 @@ public class TabellaPersona {
 	}
 
 	/**
-	 * Elimina una persona dalla tabella prendendo come parametro la persona da eliminare
-	 * @param personaScelta
-	 * @return 1 se la persona è stata eliminata
+	 * Elimina un laboratorio dalla tabella prendendo come parametro il laboratorio da eliminare
+	 * @param laboratorioScelto
+	 * @return 1 se il laboratorio è stato eliminato
 	 * 		   0 altrimenti
 	 */
-	public static int eliminaPersonaDaTabella(Persona personaScelta) {
+	public static int eliminaLaboratorioDaTabella(LabAnalisi laboratorioScelto) {
 		int verificaEliminazione = 0;
 		
 		try {
@@ -187,12 +191,12 @@ public class TabellaPersona {
 			// crea una connessione al database "dbTamponi" usando credenziali di accesso appropriate.
 			conn = ConnectorDB.connect();
 			
-			Persona persona = personaScelta;
+			LabAnalisi laboratorio = laboratorioScelto;
 			
 			// stringa contenete i comandi SQL
 			String comandoSQL = "DELETE "
-					      + "FROM Persona "
-					      + "WHERE CodiceFiscale = '" + persona.getCodiceFiscale() + "';";
+					      + "FROM LaboratorioAnalisi "
+					      + "WHERE PartitaIva = '" + laboratorio.getPartitaIva() + "';";
 			
 			
 			//esegue il comando SQL
@@ -210,7 +214,7 @@ public class TabellaPersona {
 		return verificaEliminazione;
 	}
 	
-	public static void stampaTabellaPersona() {
+	public static void stampaTabellaLaboratorio() {
 		try {
 			// caricamento del driver
 			new com.mysql.cj.jdbc.Driver();
@@ -219,20 +223,20 @@ public class TabellaPersona {
 			conn = ConnectorDB.connect();
 			
 			String comandoSQL = "SELECT * "
-						  + "FROM Persona;";
+						  + "FROM LaboratorioAnalisi;";
 			
 		
 			Statement istruzione = conn.createStatement();
 			ResultSet risultato = istruzione.executeQuery(comandoSQL);
 			
-			System.out.println("CODICEFISCALE    NOME                   COGNOME                TELEFONO");
+			System.out.println("PARTITAIVA   NOME                  TELEFONO    EMAIL");
 			System.out.println("--------------------------------------------------------------------------");
 		
 			while (risultato.next()) {
-				System.out.printf("%-16s ", risultato.getString(1)); // codice fiscale
+				System.out.printf("%-13s ", risultato.getString(1)); // partita iva
 				System.out.printf("%-22s ", risultato.getString(2)); // nome
-				System.out.printf("%-22s ", risultato.getString(3)); // cognome
-				System.out.printf("%-12s", risultato.getString(4)); // telefono
+				System.out.printf("%-12s ", risultato.getString(3)); // telefono
+				System.out.printf("%-32s", risultato.getString(4));  // email
 				System.out.println("\n--------------------------------------------------------------------------");
 			}
 			
@@ -253,7 +257,7 @@ public class TabellaPersona {
 			conn = ConnectorDB.connect();
 			
 			// stringa contenete i comandi SQL
-			String comandoSQL ="DROP TABLE Persona;";
+			String comandoSQL ="DROP TABLE LaboratorioAnalisi;";
 		
 			
 			Statement istruzione = conn.createStatement();
@@ -267,4 +271,6 @@ public class TabellaPersona {
 			System.out.println(e.getMessage());
 		}
 	}
+
 }
+

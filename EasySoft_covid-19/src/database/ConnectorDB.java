@@ -6,13 +6,15 @@ import java.sql.SQLException;
 
 /**
  * Classe che si occupa dell'apertura e della chiusura della connessione al database.
- * @author matteo
- * @version 1.1
+ * @author Team EasySoft
+ * @version 1.0
  */
 public class ConnectorDB {
 	
 	/** Stringa di connessione contenente il path del database. */
-	private static String url = "jdbc:sqlite:sqlite3/tabella.db";
+	private static String url = "jdbc:mysql://localhost/dbTamponi";
+	private static String username = "root";
+	private static String password = "123456";
 	
 	/**
 	 * Metodo statico che si occupa di aprire una connessione verso il database.
@@ -23,7 +25,7 @@ public class ConnectorDB {
 	 */
 	public static Connection connect() throws SQLException {
 		Connection conn = null;
-		conn = DriverManager.getConnection(url);
+		conn = DriverManager.getConnection(url, username, password);
 		return conn;
 	}
 	

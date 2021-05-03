@@ -124,7 +124,7 @@ public class ProxyDB implements LogIn_SignIn,AdminQuery {
 		
 		ps.setString(1,utente.getMedico().getNome());
 		ps.setString(2,utente.getMedico().getCognome());
-		ps.setString(3,formatter.format(utente.getMedico().getDataNascita()));
+		//ps.setString(3,formatter.format(utente.getMedico().getDataNascita()));
 		
 		try {
 			ps.executeUpdate();
@@ -170,8 +170,8 @@ public class ProxyDB implements LogIn_SignIn,AdminQuery {
 	
 		PreparedStatement ps = connector.prepareStatement(query);
 		
-		ps.setString(1,utente.getLab_analisi().getCodice());
-		ps.setString(2,utente.getLab_analisi().getHashPassword());
+		//ps.setString(1,utente.getLab_analisi().getCodice());
+		//ps.setString(2,utente.getLab_analisi().getHashPassword());
 		
 		try {
 			ps.executeUpdate();
