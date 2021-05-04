@@ -80,9 +80,9 @@ public class PersReg extends JFrame{
 			}
 		});
 		
-		textField = new JComboBox();
+		/*textField = new JComboBox();
 		textField.setBounds(20, 35, 190, 30);
-		panel.add(textField);
+		panel.add(textField);*/
 		
 		
 		textField_1 = new JTextField();
