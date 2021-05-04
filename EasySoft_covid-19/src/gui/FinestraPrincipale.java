@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,6 +29,10 @@ import javax.swing.border.SoftBevelBorder;
 
 public class FinestraPrincipale extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JPanel contentPane;
 	JTextField txtUsername;
 	JPasswordField passwordField;
@@ -56,10 +61,15 @@ public FinestraPrincipale() {
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		
+				
+		ImageIcon img = new ImageIcon(FinestraPrincipale.class.getResource("/covid-19.png"));
+		Image imgScaled = img.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+		img = new ImageIcon(imgScaled);
+		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		//lblNewLabel_1.setIcon(img);
-		lblNewLabel_1.setBounds(28, 80, 162, 163);
+		lblNewLabel_1.setIcon(img);
+		lblNewLabel_1.setBounds(35, 80, 150, 150);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblAziendaEdile = new JLabel("EasySoft");
@@ -71,6 +81,15 @@ public FinestraPrincipale() {
 		lblAziendaEdile.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblAziendaEdile.setVerticalTextPosition(JLabel.TOP);
 		contentPane.add(lblAziendaEdile);
+		
+		//pannello di sinistra
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBackground(new Color(205, 100,202));
+		lblNewLabel.setBounds(0, 0, 228, 400);
+		
+		contentPane.add(lblNewLabel);
+		
 		
 		txtUsername = new JTextField();
 		txtUsername.setBounds(291, 100, 250, 30);
@@ -124,11 +143,6 @@ public FinestraPrincipale() {
 		btnNewButton_2.setBounds(558, 0, 42, 23);
 		contentPane.add(btnNewButton_2);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setOpaque(true);
-		lblNewLabel.setBackground(new Color(51, 153, 204));
-		lblNewLabel.setBounds(0, 0, 228, 400);
-		contentPane.add(lblNewLabel);
 		
 		JLabel lblSeiUnNuovo = new JLabel("Sei un nuovo utente?");
 		//lblSeiUnNuovo.setFont(font);
@@ -140,14 +154,6 @@ public FinestraPrincipale() {
 		lblLogin.setBounds(373, 29, 62, 24);
 		contentPane.add(lblLogin);
 		
-		//ImageIcon user = new ImageIcon(FinestraPrincipale.class.getResource("/user.png"));
-		//Image userScaled = user.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-		//user = new ImageIcon(userScaled);
-		
-		JLabel label = new JLabel("");
-		//label.setIcon(user);
-		label.setBounds(432, 24, 31, 29);
-		contentPane.add(label);
 		
 		JLabel lblUsername = new JLabel("Password");
 		//lblUsername.setFont(font);
@@ -158,6 +164,19 @@ public FinestraPrincipale() {
 		//lblUsername_1.setFont(font);
 		lblUsername_1.setBounds(291, 80, 72, 15);
 		contentPane.add(lblUsername_1);
+		
+		
+		
+		ImageIcon user = new ImageIcon(FinestraPrincipale.class.getResource("/user.png"));
+		Image userScaled = user.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+		user = new ImageIcon(userScaled);
+		
+		//pannello di destra
+		JLabel label = new JLabel("");
+		label.setIcon(user);
+		label.setBounds(432, 24, 31, 29);
+		contentPane.add(label);
+		
 		
 		setVisible(true);
 	}
