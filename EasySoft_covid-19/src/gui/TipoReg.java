@@ -109,7 +109,8 @@ public class TipoReg extends JFrame {
 		contentPane.add(button2);
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				dispose();
+				new PersReg();
 			}
 		});
 		// medico
