@@ -56,7 +56,7 @@ public FinestraPrincipale() {
 		
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(0, 0, 128));
-		contentPane.setBackground(new Color(204, 204, 255));
+		contentPane.setBackground(new Color(200,200,200));
 		contentPane.setBorder(null);
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
@@ -69,7 +69,7 @@ public FinestraPrincipale() {
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setIcon(img);
-		lblNewLabel_1.setBounds(35, 80, 150, 150);
+		lblNewLabel_1.setBounds(35, 100, 150, 150);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblAziendaEdile = new JLabel("EasySoft");
@@ -77,15 +77,27 @@ public FinestraPrincipale() {
 		lblAziendaEdile.setBackground(new Color(0, 0, 139));
 		lblAziendaEdile.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblAziendaEdile.setForeground(Color.BLACK);
-		lblAziendaEdile.setBounds(28, 50, 162, 29);
+		lblAziendaEdile.setBounds(28, 35, 162, 29);
 		lblAziendaEdile.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblAziendaEdile.setVerticalTextPosition(JLabel.TOP);
 		contentPane.add(lblAziendaEdile);
 		
+		//CREAZIONE DEl pulsante con azione all'interno del pannello
+		JButton button1= new JButton();
+		button1.setText("amministratore");
+		button1.setBounds(0,270, 115, 20);
+		button1.setOpaque(true);
+		button1.setBackground(Color.white);
+		button1.setBorderPainted(false);
+		//button1.addActionListener(e -> System.out.println("Vaffancùllo"));
+		button1.setFont(new Font("Dialog", Font.BOLD, 10));
+		
+		contentPane.add(button1);
+				
 		//pannello di sinistra
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setOpaque(true);
-		lblNewLabel.setBackground(new Color(205, 100,202));
+		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setBounds(0, 0, 228, 400);
 		
 		contentPane.add(lblNewLabel);

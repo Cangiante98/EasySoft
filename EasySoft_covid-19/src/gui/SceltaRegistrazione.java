@@ -41,7 +41,7 @@ public class SceltaRegistrazione extends JFrame {
 		
 		JPanel contentPane = new JPanel();
 		contentPane.setForeground(new Color(0, 0, 128));
-		contentPane.setBackground(new Color(120,200,100));
+		contentPane.setBackground(new Color(200,200,200));
 		contentPane.setBorder(null);
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
@@ -52,7 +52,7 @@ public class SceltaRegistrazione extends JFrame {
 		panel.setBounds(12, 12, 450, 220);
 		panel.setPreferredSize(new Dimension(500, 150));
 		panel.setBorder(null);
-		panel.setBackground(new Color(200, 255, 204));
+		panel.setBackground(Color.WHITE);
 		
 		
 		// PULSANTE INDIETRO
@@ -76,7 +76,7 @@ public class SceltaRegistrazione extends JFrame {
 		btn_x.setFont(new Font("Dialog", Font.BOLD, 10));
 		btn_x.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btn_x.setBackground(new Color(255, 51, 0));
-		btn_x.setBounds(555, 0, 42, 23);
+		btn_x.setBounds(558, 0, 42, 23);
 		btn_x.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -127,21 +127,6 @@ public class SceltaRegistrazione extends JFrame {
 			}
 		});
 		
-		// amministratore
-		ImageIcon amm = new ImageIcon(SceltaRegistrazione.class.getResource("/amministratore.png"));
-		JButton button4 = new JButton(amm);
-		button4.setBounds(480, 50, 100, 100);
-		button4.setBackground(getForeground());
-		button4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		button4.setContentAreaFilled(false);
-		button4.setBorder(null);
-		contentPane.add(button4);
-		button4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		
 		JLabel easysoft = new JLabel("registrati come");
 		easysoft.setHorizontalAlignment(SwingConstants.CENTER);
 		easysoft.setBackground(new Color(0, 0, 139));
@@ -179,15 +164,6 @@ public class SceltaRegistrazione extends JFrame {
 		labanalisi.setHorizontalTextPosition(SwingConstants.CENTER);
 		labanalisi.setVerticalTextPosition(JLabel.TOP);
 		contentPane.add(labanalisi);
-		
-		JLabel amministratore = new JLabel("amministratore");
-		amministratore.setHorizontalAlignment(SwingConstants.CENTER);
-		amministratore.setBackground(new Color(0, 0, 139));
-		amministratore.setFont(new Font("Dialog", Font.ITALIC, 12));
-		amministratore.setForeground(Color.BLACK);
-		amministratore.setBounds(450,115, 162, 29);
-		amministratore.setHorizontalTextPosition(SwingConstants.CENTER);				amministratore.setVerticalTextPosition(JLabel.TOP);
-		contentPane.add(amministratore);
 		
 		setVisible(true);
 		contentPane.add(panel);
