@@ -116,7 +116,7 @@ public LogIn_Window() {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new SceltaRegistrazione();
+				new TipoReg();
 			}
 		});
 

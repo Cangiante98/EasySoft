@@ -22,7 +22,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 
 
-public class SceltaRegistrazione extends JFrame {
+public class TipoReg extends JFrame {
 	
 	/**
 	 * 
@@ -32,7 +32,7 @@ public class SceltaRegistrazione extends JFrame {
 	JTextField txtUsername;
 	JPasswordField passwordField;
 	
-	public SceltaRegistrazione() {
+	public TipoReg() {
 				
 		setSize(600,300);
 		setLocationRelativeTo(null);
@@ -85,7 +85,7 @@ public class SceltaRegistrazione extends JFrame {
 		contentPane.add(btn_x);
 		
 		// labanalisi
-		ImageIcon lab = new ImageIcon(SceltaRegistrazione.class.getResource("/labanalisi.png"));
+		ImageIcon lab = new ImageIcon(TipoReg.class.getResource("/labanalisi.png"));
 		JButton button1 = new JButton(lab);
 		button1.setBounds(310, 87, 100, 100);
 		button1.setBackground(getForeground());
@@ -99,7 +99,7 @@ public class SceltaRegistrazione extends JFrame {
 			}
 		});
 		// persona
-		ImageIcon pers = new ImageIcon(SceltaRegistrazione.class.getResource("/persona.png"));
+		ImageIcon pers = new ImageIcon(TipoReg.class.getResource("/persona.png"));
 		JButton button2 = new JButton(pers);
 		button2.setBounds(180, 100, 100, 100);
 		button2.setBackground(getForeground());
@@ -113,7 +113,7 @@ public class SceltaRegistrazione extends JFrame {
 			}
 		});
 		// medico
-		ImageIcon med = new ImageIcon(SceltaRegistrazione.class.getResource("/dottore.png"));
+		ImageIcon med = new ImageIcon(TipoReg.class.getResource("/dottore.png"));
 		JButton button3 = new JButton(med);
 		button3.setBounds(50, 100, 100, 100);
 		button3.setBackground(getForeground());
