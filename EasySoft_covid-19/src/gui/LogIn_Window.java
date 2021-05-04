@@ -27,7 +27,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 
-public class FinestraPrincipale extends JFrame{
+public class LogIn_Window extends JFrame{
 
 	/**
 	 * 
@@ -41,14 +41,14 @@ public class FinestraPrincipale extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new FinestraPrincipale();
+					new LogIn_Window();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-public FinestraPrincipale() {
+public LogIn_Window() {
 		
 		setSize(600,300);
 		setLocationRelativeTo(null);
@@ -62,7 +62,7 @@ public FinestraPrincipale() {
 		setContentPane(contentPane);
 		
 				
-		ImageIcon img = new ImageIcon(FinestraPrincipale.class.getResource("/covid-19.png"));
+		ImageIcon img = new ImageIcon(LogIn_Window.class.getResource("/covid-19.png"));
 		Image imgScaled = img.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 		img = new ImageIcon(imgScaled);
 		
@@ -179,7 +179,7 @@ public FinestraPrincipale() {
 		
 		
 		
-		ImageIcon user = new ImageIcon(FinestraPrincipale.class.getResource("/user.png"));
+		ImageIcon user = new ImageIcon(LogIn_Window.class.getResource("/user.png"));
 		Image userScaled = user.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
 		user = new ImageIcon(userScaled);
 		

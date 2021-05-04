@@ -65,7 +65,7 @@ public class SceltaRegistrazione extends JFrame {
 		btn_indietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new FinestraPrincipale();
+				new LogIn_Window();
 				}
 			});
 				
