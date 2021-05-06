@@ -8,6 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import Exception.*;
+import residenza.Comune;
+import residenza.Regione;
 import utente.Utente;
 
 public class ProxyDB implements LogIn_SignIn,AdminQuery {
@@ -222,5 +224,17 @@ public class ProxyDB implements LogIn_SignIn,AdminQuery {
 	public Utente getUtente(String username) throws SQLException, EasySoftException, ParseException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public void addRegione(Regione regione){
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addComune(Comune comune) {
+		// TODO Auto-generated method stub
+		
 	}
 }

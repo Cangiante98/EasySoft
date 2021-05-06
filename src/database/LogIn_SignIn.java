@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import Exception.*;
+import residenza.Comune;
+import residenza.Regione;
 import utente.Utente;
 
 /**
@@ -59,4 +61,8 @@ public interface LogIn_SignIn {
 	 * @see ConnectorDB
 	 */
 	public Utente getUtente(String username) throws SQLException,EasySoftException,ParseException;
+
+	public void addRegione(Regione regione);
+
+	public void addComune(Comune comune);
 }

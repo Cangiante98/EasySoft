@@ -1,22 +1,33 @@
 package _EasySoft;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import Exception.EasySoftException;
 import database.ProxyDB;
+import residenza.Comune;
+import residenza.CreaArchivio;
+import residenza.Provincia;
+import residenza.Regione;
+import residenza.TabellaResidenza;
 import utente.Persona;
 import utente.Utente;
 
 public class HomePage {
 
-	public static void main(String[] args) throws SQLException, EasySoftException {
-		// TODO Auto-generated method stub
-		Persona persona= new Persona("marco", "Sguera", "DDGMRC99I70W441T", "4358679486");
-		Utente utente= new Utente(persona,"username","password",true);
-		
-		utente.addUtente();
+	public static void main(String[] args) throws SQLException, EasySoftException, IOException {
 		
 		
+		new CreaArchivio();
 	}
 
 }
