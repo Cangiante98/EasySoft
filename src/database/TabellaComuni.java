@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class TabellaComuni {
@@ -94,7 +96,7 @@ public class TabellaComuni {
 			conn = ConnectorDB.connect();
 			
 			// stringa contenete i comandi SQL
-			String comandoSQL = "SELECT Provincia "
+			String comandoSQL = "SELECT DISTINCT Provincia "
 								+ "FROM Comuni;";
 			
 			//esegue il comando SQL
@@ -117,9 +119,9 @@ public class TabellaComuni {
 			e.printStackTrace();
 		}
 		
-		/*Comparator<String> c;
-		listaProvince.sort(c);
-		*/
+		// ordina in base al nome
+		Collections.sort(listaProvince);
+		
 		return listaProvince;
 	}
 
@@ -158,6 +160,8 @@ public class TabellaComuni {
 			e.printStackTrace();
 		}
 		
+		// ordina in base al nome
+		Collections.sort(listaComuni);
 		
 		return listaComuni;
 	}
