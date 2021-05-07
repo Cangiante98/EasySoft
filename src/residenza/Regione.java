@@ -7,12 +7,13 @@ import database.ProxyDB;
 
 public class Regione {
 	
-	private String nomereg= null;
-	private ArrayList <Provincia> ListaProvincia=null;
+	private String nomereg = null;
+	private ArrayList <Provincia> ListaProvincia = null;
 	
 	public Regione() {
 		super();
 	}
+	
 	public String getNomereg() {
 		return nomereg;
 	}
@@ -20,6 +21,7 @@ public class Regione {
 	public void setNomereg(String nomereg) {
 		this.nomereg = nomereg;
 	}
+	
 	
 	public ArrayList<Provincia> getListaProvincia() {
 		return ListaProvincia;
@@ -34,10 +36,12 @@ public class Regione {
 		this.nomereg = nomereg;
 		ListaProvincia = listaProvincia;
 	}
+	
 	public Regione(String nomereg) {
 		super();
 		this.nomereg = nomereg;
 	}
+	
 	@Override
 	public String toString() {
 		return "Regione [nomereg=" + nomereg + ", ListaComuni=" + ", ListaProvincia=" + ListaProvincia

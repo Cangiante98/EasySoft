@@ -11,10 +11,19 @@ public class CreaArchivio {
 
 	public CreaArchivio() {
 		String file = "listacomuni\\listacomuni.csv";
-
-		Regione regione = new Regione("prova");
-		regione.addRegione();
-
+	
+		//Regione regionePuglia = this.creaRegionePuglia();
+		//regione.addRegione();
+		
+		//TabellaRegione.inserisciRegioneInTabella(regionePuglia);
+		
+		TabellaComune.creaTabellaComuni();
+		
+		//LeggiDaFile.apriFile("C:\\Users\\ETTORE\\git\\EasySoft\\listacomuni\\listacomuni.csv");
+		//LeggiDaFile.leggiFile();
+		//LeggiDaFile.chiudiFile();
+		
+		
 		/*Regione basilicata = new Regione();
 		basilicata.setNomereg("Basilicata");
 		Regione calabria = new Regione();
@@ -74,4 +83,16 @@ public class CreaArchivio {
 
 	}
 
+	public static Regione creaRegionePuglia() {
+		ArrayList<Provincia> province = new ArrayList<Provincia>();
+		province.add(new Provincia("Bari"));
+		province.add(new Provincia("Taranto"));
+		province.add(new Provincia("Barletta-Andria-Trani"));
+		province.add(new Provincia("Foggia"));
+		province.add(new Provincia("Lecce"));
+		province.add(new Provincia("Brindisi"));
+		
+		Regione regionePuglia = new Regione("Puglia", province);
+		return regionePuglia;
+	}
 }

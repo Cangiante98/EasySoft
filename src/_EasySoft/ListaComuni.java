@@ -42,10 +42,10 @@ public class ListaComuni {
 		String line="";
 		
 		try {
-			BufferedReader br =new BufferedReader(new FileReader(file));
+			BufferedReader br = new BufferedReader(new FileReader(file));
 			while((line=br.readLine())!= null) {
 				
-				String[] riga= line.split(";");
+				String[] riga = line.split(";");
 				//System.out.println(riga[0]);
 			}
 		}catch(Exception e) {

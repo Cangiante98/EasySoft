@@ -4,8 +4,20 @@ import java.util.ArrayList;
 
 public class Provincia {
 	
+	private String nome = null;
 	private ArrayList <Comune> ListaComuni;
-	private String nomeProvincia=null;
+	
+	// costruttori
+	public Provincia(String nome, ArrayList<Comune> ListaComuni) {
+		super();
+		this.nome = nome;
+		this.ListaComuni = ListaComuni;
+	}
+	
+	public Provincia(String nome) {
+		super();
+		this.nome = nome;
+	}
 	
 	
 	public ArrayList<Comune> getProvincie() {
@@ -14,23 +26,16 @@ public class Provincia {
 	public void setProvincie(ArrayList<Comune> ListaComuni) {
 		this.ListaComuni = ListaComuni;
 	}
-	public String getProvincia() {
-		return nomeProvincia;
-	}
-	public void setProvincia(String provincia) {
-		this.nomeProvincia = provincia;
+	public String getNome() {
+		return nome;
 	}
 	
-	public Provincia(ArrayList<Comune> ListaComuni, String provincia) {
-		super();
-		this.ListaComuni = ListaComuni;
-		this.nomeProvincia = provincia;
+	
+	public void setProvincia(String nome) {
+		this.nome = nome;
 	}
 	
-	public Provincia(String provincia) {
-		super();
-		this.nomeProvincia = provincia;
-	}
+	
 	
 
 }

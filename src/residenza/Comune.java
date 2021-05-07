@@ -7,7 +7,7 @@ import database.ProxyDB;
 
 public class Comune {
 	
-	private String nomeComune=null;
+	private String nomeComune = null;
 	
 	
 	

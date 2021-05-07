@@ -4,16 +4,17 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import database.ConnectorDB;
-public class TabellaResidenza {
+public class TabellaRegione{
 	
 	
 	private static Connection conn = null;
 		
-		/**
-		 * Crea la tabella persona se non esiste già
-		 */
+	/**
+	 * Crea la tabella regioni se non esiste già
+	 */
 	public static void creaTabellaRegione() {
 				
 		try {
@@ -24,9 +25,10 @@ public class TabellaResidenza {
 			conn = ConnectorDB.connect();
 			
 			// stringa contenete i comandi SQL
-			String comandoSQL ="CREATE TABLE IF NOT EXISTS Regione ("
-									+ "Nome 	CHAR(30) PRIMARY KEY, "
-									+ "Capoluogo		  	VARCHAR(20) NOT NULL, "
+			String comandoSQL = "CREATE TABLE IF NOT EXISTS Regioni ("
+									+ "NomeRegione 		VARCHAR(30) NOT NULL, "
+									+ "NomeProvincia 	VARCHAR(30) NOT NULL, "
+									+ "PRIMARY KEY(NomeRegione,NomeProvincia)"
 									+ ");";
 		
 			
@@ -42,6 +44,7 @@ public class TabellaResidenza {
 			System.out.println(e.getMessage());
 		}
 	}
+	
 	public static int inserisciRegioneInTabella(Regione regioneInserita) {
 		int verificaInserimento = 0;
 		
@@ -52,21 +55,22 @@ public class TabellaResidenza {
 			// crea una connessione al database "dbTamponi" usando credenziali di accesso appropriate.
 			conn = ConnectorDB.connect();
 			
-			Regione regione = regioneInserita; 
+
 			
 			
-			String comandoSQL = "INSERT INTO Regione(nomereg) "
-									+ "VALUES ('"+ regione.getNomereg() + "','" 
-												;
-			
-		
+			String comandoSQL = null;
 			Statement istruzione = conn.createStatement();
-			//inserisce la regione nella tabella se non esiste già
-			//ritorna 1 se è stata inserita altrimenti 0
-			verificaInserimento = istruzione.executeUpdate(comandoSQL);
+			for(int i = 0; i < regioneInserita.getListaProvincia().size(); i++) {
+				comandoSQL = "INSERT INTO Regioni(NomeRegione, NomeProvincia) "
+										+ "VALUES ('"+ regioneInserita.getNomereg() + "','" 
+													 + regioneInserita.getListaProvincia().get(i).getNome() + "')";
 			
+			
+				//ritorna 1 se è stata inserita altrimenti 0
+				verificaInserimento = istruzione.executeUpdate(comandoSQL);
+			}
 			// chiude connessione database
-						ConnectorDB.close(conn);
+			ConnectorDB.close(conn);
 			
 		}
 		catch (SQLException e) {
@@ -76,6 +80,7 @@ public class TabellaResidenza {
 		return verificaInserimento;
 	}
 	
+	//***** NON FUNZIONA - DA SISTEMARE ******+
 	public static void stampaTabellaRegione() {
 		try {
 			// caricamento del driver
@@ -85,7 +90,7 @@ public class TabellaResidenza {
 			conn = ConnectorDB.connect();
 			
 			String comandoSQL = "SELECT * "
-						  + "FROM Regione;";
+						  + "FROM Regioni;";
 			
 		
 			Statement istruzione = conn.createStatement();
@@ -107,6 +112,7 @@ public class TabellaResidenza {
 			System.out.println(e.getMessage());
 		}
 	}
+	
 	public static void eliminaTabellaRegione() {
 
 		try {
@@ -117,7 +123,7 @@ public class TabellaResidenza {
 			conn = ConnectorDB.connect();
 			
 			// stringa contenete i comandi SQL
-			String comandoSQL ="DROP TABLE Regione;";
+			String comandoSQL ="DROP TABLE Regioni;";
 		
 			
 			Statement istruzione = conn.createStatement();
@@ -132,4 +138,11 @@ public class TabellaResidenza {
 		}
 	}
 	
+	public static ArrayList<Provincia> getListaProvince(Regione regioneInserita){
+		ArrayList<Provincia> listaProvince = new ArrayList<Provincia>();
+		
+		
+		
+		return listaProvince;
+	}
 }
