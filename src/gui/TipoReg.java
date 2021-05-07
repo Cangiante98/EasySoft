@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -110,7 +111,12 @@ public class TipoReg extends JFrame {
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new PersReg();
+				try {
+					new PersReg();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		// medico

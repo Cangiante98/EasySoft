@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,6 +24,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
+
+import database.TabellaComuni;
+import it.uniba.di.prog2.cs2021.gruppo31.dado.Filettatura;
 
 @SuppressWarnings("rawtypes")
 public class PersReg extends JFrame{
@@ -41,7 +45,7 @@ public class PersReg extends JFrame{
 	JTextField txtUsername;
 	JPasswordField passwordField;
 	
-	public PersReg() {
+	public PersReg() throws SQLException {
 		setSize(600, 460);
 		setLocationRelativeTo(null);
 		setUndecorated(true);
@@ -117,25 +121,17 @@ public class PersReg extends JFrame{
 		tenda3.setBounds(20, 295, 190, 30);
 		panelloscrollabile.add(tenda3);
 		
-		/*
-		//PROVINCIE
-		try {
-			
-			selezione0 = new JComboBox();
-			selezione0.setBounds(20, 360, 190, 30);
-			panelloscrollabile.add(selezione0);
-		}catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, "ERROR: Errore interno database!");
-		}
-		//COMUNI
-		try {
-			selezione1 = new JComboBox();
-			selezione1.setBounds(20, 425, 190, 30);
-			panelloscrollabile.add(selezione1);
-		}catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, "ERROR: Errore interno database!");
-		}
-		*/
+		
+		ArrayList<String> province = new ArrayList<String>();
+		province=TabellaComuni.caricaProvince();
+		selezione0 = new JComboBox();
+		
+		selezione0.setBounds(20, 360, 190, 30);
+		panelloscrollabile.add(selezione0);
+		selezione1 = new JComboBox();
+		selezione1.setBounds(20, 425, 190, 30);
+		panelloscrollabile.add(selezione1);
+		
 		
 		
 		tenda4 = new JTextField();
