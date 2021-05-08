@@ -115,17 +115,12 @@ public class TipoReg extends JFrame {
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				try {
-					new PersReg(listaProvince);
-					/******+***
-					 * 
-					 * MODIFICATO
-					 * 
-					 */
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				new RegPers1();
+				/******+***
+				 * 
+				 * MODIFICATO da marco
+				 * 
+				 */
 			}
 		});
 		// medico
