@@ -34,6 +34,7 @@ public class LogIn_Window extends JFrame{
 	private static String listaProvince[];// conterrà le province caricate dal db
 	/**
 	 * 
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel contentPane;

@@ -8,6 +8,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * 
+ * @author ETTORE
+ *
+ */
 public class AmazonSESSample {
 
     // Replace sender@example.com with your "From" address.

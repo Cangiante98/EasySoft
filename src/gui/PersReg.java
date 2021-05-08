@@ -45,6 +45,11 @@ public class PersReg extends JFrame{
 	JPasswordField passwordField;
 	
 	@SuppressWarnings("unchecked")
+	/**
+	 * 
+	 * @param listaProvince
+	 * @throws SQLException
+	 */
 	public PersReg(String listaProvince[]) throws SQLException {
 		setSize(600, 460);
 		setLocationRelativeTo(null);

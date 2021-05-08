@@ -13,6 +13,7 @@ public class TabellaComuni {
 	private static Connection conn = null;
 	
 	/**
+	 * 
 	 * Crea la tabella comuni se non esiste già
 	 */
 	public static void creaTabellaComuni() {
