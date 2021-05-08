@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +23,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import database.TabellaComuni;
+
 
 public class TipoReg extends JFrame {
 	
@@ -33,7 +36,7 @@ public class TipoReg extends JFrame {
 	JTextField txtUsername;
 	JPasswordField passwordField;
 	
-	public TipoReg() {
+	public TipoReg(String listaProvince[]) {
 				
 		setSize(600,300);
 		setLocationRelativeTo(null);
@@ -112,7 +115,12 @@ public class TipoReg extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				try {
-					new PersReg();
+					new PersReg(listaProvince);
+					/******+***
+					 * 
+					 * MODIFICATO
+					 * 
+					 */
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

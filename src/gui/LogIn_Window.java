@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
@@ -27,8 +28,10 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 
-public class LogIn_Window extends JFrame{
+import database.TabellaComuni;
 
+public class LogIn_Window extends JFrame{
+	private static String listaProvince[];// conterrà le province caricate dal db
 	/**
 	 * 
 	 */
@@ -38,6 +41,8 @@ public class LogIn_Window extends JFrame{
 	JPasswordField passwordField;
 	
 	public static void main(String[] args) {
+		listaProvince = TabellaComuni.caricaProvince();
+	
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -116,7 +121,7 @@ public LogIn_Window() {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new TipoReg();
+				new TipoReg(listaProvince);
 			}
 		});
 

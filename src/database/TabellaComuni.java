@@ -86,8 +86,10 @@ public class TabellaComuni {
 	 * Carica dal database tutte le province e le inserisce in un ArrayList ordinato 
 	 * @return
 	 */
-	public static ArrayList<String> caricaProvince() {
+	public static String[] caricaProvince() {
 		ArrayList<String> listaProvince = new ArrayList<String>();
+		String arrayListaProvince[] = null;  
+		
 		try {
 			// caricamento del driver
 			new com.mysql.cj.jdbc.Driver();
@@ -122,12 +124,20 @@ public class TabellaComuni {
 		// ordina in base al nome
 		Collections.sort(listaProvince);
 		
-		return listaProvince;
+		//copia l'arraylist in un array cosi da ritornare l'array 
+		arrayListaProvince = new String[listaProvince.size()];
+		for(int i = 0; i < listaProvince.size(); i++) {
+			arrayListaProvince[i] = listaProvince.get(i); 
+		}
+		
+		
+		return arrayListaProvince;
 	}
 
 	
-	public static ArrayList<String> caricaComuni(String provinciaInserita) {
+	public static String[] caricaComuni(String provinciaInserita) {
 		ArrayList<String> listaComuni = new ArrayList<String>();
+		String arrayListaComuni[] = null;  
 		try {
 			// caricamento del driver
 			new com.mysql.cj.jdbc.Driver();
@@ -163,7 +173,13 @@ public class TabellaComuni {
 		// ordina in base al nome
 		Collections.sort(listaComuni);
 		
-		return listaComuni;
+		//copia l'arraylist in un array cosi da ritornare l'array 
+		arrayListaComuni = new String[listaComuni.size()];
+		for(int i = 0; i < listaComuni.size(); i++) {
+			arrayListaComuni[i] = listaComuni.get(i); 
+		}
+		
+		return arrayListaComuni;
 	}
 
 	

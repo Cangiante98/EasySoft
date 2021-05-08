@@ -26,7 +26,6 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 
 import database.TabellaComuni;
-import it.uniba.di.prog2.cs2021.gruppo31.dado.Filettatura;
 
 @SuppressWarnings("rawtypes")
 public class PersReg extends JFrame{
@@ -45,7 +44,8 @@ public class PersReg extends JFrame{
 	JTextField txtUsername;
 	JPasswordField passwordField;
 	
-	public PersReg() throws SQLException {
+	@SuppressWarnings("unchecked")
+	public PersReg(String listaProvince[]) throws SQLException {
 		setSize(600, 460);
 		setLocationRelativeTo(null);
 		setUndecorated(true);
@@ -121,13 +121,15 @@ public class PersReg extends JFrame{
 		tenda3.setBounds(20, 295, 190, 30);
 		panelloscrollabile.add(tenda3);
 		
+		//inserisce la lista dell province nel menù a tendina
+		selezione0 = new JComboBox(listaProvince);
 		
-		ArrayList<String> province = new ArrayList<String>();
-		province=TabellaComuni.caricaProvince();
-		selezione0 = new JComboBox();
-		
+	
 		selezione0.setBounds(20, 360, 190, 30);
 		panelloscrollabile.add(selezione0);
+		
+		
+		
 		selezione1 = new JComboBox();
 		selezione1.setBounds(20, 425, 190, 30);
 		panelloscrollabile.add(selezione1);
