@@ -121,4 +121,16 @@ public class UtilityUtente {
 		//lunghezza consentita 16 caratteri
 		//controlli sulla posizione delle lettere e dei numeri
 	}
+	
+	/**
+	 * Genera l'hash della password fornita in input.<br>
+	 * L'hash generato è sempre un numero positivo: <code> (password.hashCode() &amp; 0xfffffff) </code>
+	 * @param password Password da cui generare il codice hash.
+	 * @return Hash della password fornita in input.
+	 */
+	public static String hashPwd(String password) {
+		if(password == null)	return null;
+		int hash = (password.hashCode() & 0xfffffff);
+		return Integer.toString(hash);
+	}
 }

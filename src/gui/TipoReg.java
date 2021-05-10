@@ -115,7 +115,7 @@ public class TipoReg extends JFrame {
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new RegPers1();
+				new RegPers1(listaProvince);
 				/******+***
 				 * 
 				 * MODIFICATO da marco

@@ -54,7 +54,7 @@ public class RegPers2 extends JFrame{
 	JPasswordField passwordField;
 	
 	@SuppressWarnings("unchecked")
-	public RegPers2(String[] listaprovince) throws SQLException {
+	public RegPers2(String user, String pass , String[] listaProvince) throws SQLException {
 		setSize(600, 460);
 		setLocationRelativeTo(null);
 		setUndecorated(true);
@@ -148,11 +148,11 @@ public class RegPers2 extends JFrame{
 		
 		
 		// SETTAGGIO LISTE PROVINCIE E COMUNI		
-		provincia = new JComboBox(listaprovince);
+		provincia = new JComboBox(listaProvince);
 		provincia.setBounds(20, 360, 190, 30);
 		panelloscrollabile.add(provincia);
 		
-		comune = new JComboBox(listaprovince);
+		comune = new JComboBox(listaProvince);
 		comune.setBounds(20, 425, 190, 30);
 		panelloscrollabile.add(comune);
 		

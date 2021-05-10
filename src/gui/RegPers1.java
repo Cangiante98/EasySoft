@@ -1,16 +1,19 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -18,6 +21,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
+
+import Exception.EasySoftException;
+import Exception.ErroriDB;
+import utente.UtilityUtente;
 
 public class RegPers1 extends JFrame {
 	
@@ -27,7 +34,7 @@ public class RegPers1 extends JFrame {
 	private JTextField password1;
 	private JTextField password2;
 
-	public RegPers1() {
+	public RegPers1(String listaProvince[]) {
 		setSize(600, 300);
 		setLocationRelativeTo(null);
 		setUndecorated(true);
@@ -98,6 +105,50 @@ public class RegPers1 extends JFrame {
 			}
 		});
 		
+		// pulsante info
+		img = new ImageIcon(LogIn_Window.class.getResource("/info.png"));	
+		JButton button = new JButton(img);
+		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		button.setContentAreaFilled(false);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String warning = "Vincoli username:\n";
+				warning += "- Lunghezza minima = 5\n";
+				warning += "- Lunghezza massima = 20\n";
+				warning += "- Puo' contenere solo lettere, cifre e i seguenti caratteri: { ._- }\n";
+				warning += "- Deve iniziare con una lettera\n";
+				warning += "Vincoli password:\n";
+				warning += "- Lunghezza minima = 8\n";
+				warning += "- Lunghezza massima = 50\n";
+				warning += "- Puo' contenere solo lettere, cifre e i seguenti caratteri: { .,;:_+/*^=?!()[]{}@%#$- }\n";
+				JOptionPane.showMessageDialog(null, warning);
+			}
+		});
+		button.setBorder(null);
+		button.setBounds(369, 10, 32, 32);
+		contentPane.add(button);
+		
+		JLabel lblregistrazione = new JLabel("info utente");
+		lblregistrazione.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblregistrazione.setBounds(260, 18, 155, 15);
+		contentPane.add(lblregistrazione);
+		
+		JLabel lblUsername = new JLabel("Inserisci username:");
+		lblUsername.setFont(new Font("Dialog", Font.ITALIC, 15));
+		lblUsername.setBounds(251, 82, 155, 15);
+		contentPane.add(lblUsername);
+		
+		JLabel lblpass = new JLabel("Inserisci password:");
+		lblpass.setFont(new Font("Dialog", Font.ITALIC, 15));
+		lblpass.setBounds(251, 147, 155, 15);
+		contentPane.add(lblpass);
+		
+		JLabel lblpass2 = new JLabel("Inserisci password:");
+		lblpass2.setFont(new Font("Dialog", Font.ITALIC, 15));
+		lblpass2.setBounds(251, 212, 155, 15);
+		contentPane.add(lblpass2);
+		
+		
 		// SETTO LE TENDINE INPUT
 		username = new JTextField();
 		username.setColumns(10);
@@ -114,8 +165,85 @@ public class RegPers1 extends JFrame {
 		password2.setBounds(250, 230, 190, 30);
 		contentPane.add(password2);
 		
+		//pulsante avanti e annulla
+		JButton btnNewButton_1 = new JButton("Avanti");
+		btnNewButton_1.setOpaque(true);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+				checkreg(listaProvince);
+			}
+		});
+		btnNewButton_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_1.setBackground(new Color(46, 139, 87));
+		btnNewButton_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		btnNewButton_1.setBounds(503, 263, 85, 25);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnAnnulla = new JButton("Annulla");
+		btnAnnulla.setOpaque(true);
+		btnAnnulla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new TipoReg(listaProvince);
+			}
+		});
+		btnAnnulla.setForeground(new Color(255, 255, 255));		
+		btnAnnulla.setBackground(new Color(178, 34, 34));
+		btnAnnulla.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		btnAnnulla.setBounds(406, 263, 85, 25);
+		contentPane.add(btnAnnulla);
 		
 		setVisible(true);
+	}
+	
+	public void checkreg(String listaProvince[]) {
+		String user = username.getText();
+		char[] charPass = ((JPasswordField) password1).getPassword();
+		String pass = new String(charPass);
+		char[] charPass_1 = ((JPasswordField) password2).getPassword();
+		String pass_1 = new String(charPass_1);
+		
+		if(user.length() == 0 || pass.length() == 0 || pass_1.length() == 0)
+		{
+			setCursor(Cursor.getDefaultCursor());
+			JOptionPane.showMessageDialog(null, "ERROR: Alcuni campi sono vuoti!");
+			return;
+		}
+		if(pass.equals(pass_1));
+		else
+		{
+			setCursor(Cursor.getDefaultCursor());
+			JOptionPane.showMessageDialog(null, "ERROR: Le password non coincidono!");
+			return;
+		}
+		int res = UtilityUtente.checkCorrettezzaCredenziali(user,pass);
+		if(res == 0);
+		else {
+			setCursor(Cursor.getDefaultCursor());
+			JOptionPane.showMessageDialog(null, "ERROR: Vincoli non rispettati!\nPremere su Info per controllare i vincoli.");
+			return;
+		}
+		
+		try {
+			UtilityUtente.checkUtente(user,UtilityUtente.hashPwd(pass));
+		} catch (EasySoftException e) {
+			if(e.getMessage().equals(ErroriDB.USERNAME_NOT_FOUND)) { //Username valido
+				dispose();
+				setCursor(Cursor.getDefaultCursor());
+				try {
+					new RegPers2(user,pass,listaProvince);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				return;
+			}
+		} catch (Exception e) {
+			setCursor(Cursor.getDefaultCursor());
+			JOptionPane.showMessageDialog(null, "ERROR: Errore interno database!");
+			return;
+		}
+		
 	}
 
 }
