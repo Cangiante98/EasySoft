@@ -30,9 +30,9 @@ public class RegPers1 extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField username;
-	private JTextField password1;
-	private JTextField password2;
+	private JTextField txtUsername;
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
 
 	public RegPers1(String listaProvince[]) {
 		setSize(600, 300);
@@ -150,20 +150,20 @@ public class RegPers1 extends JFrame {
 		
 		
 		// SETTO LE TENDINE INPUT
-		username = new JTextField();
-		username.setColumns(10);
-		username.setBounds(250, 100, 190, 30);
-		contentPane.add(username);
+		txtUsername = new JTextField();
+		txtUsername.setColumns(10);
+		txtUsername.setBounds(250, 100, 190, 30);
+		contentPane.add(txtUsername);
 
-		password1 = new JTextField();
-		password1.setColumns(10);
-		password1.setBounds(250, 165, 190, 30);
-		contentPane.add(password1);
+		passwordField = new JPasswordField();
+		passwordField.setColumns(10);
+		passwordField.setBounds(250, 165, 190, 30);
+		contentPane.add(passwordField);
 		
-		password2 = new JTextField();
-		password2.setColumns(10);
-		password2.setBounds(250, 230, 190, 30);
-		contentPane.add(password2);
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setColumns(10);
+		passwordField_1.setBounds(250, 230, 190, 30);
+		contentPane.add(passwordField_1);
 		
 		//pulsante avanti e annulla
 		JButton btnNewButton_1 = new JButton("Avanti");
@@ -198,11 +198,13 @@ public class RegPers1 extends JFrame {
 	}
 	
 	public void checkreg(String listaProvince[]) {
-		String user = username.getText();
-		char[] charPass = ((JPasswordField) password1).getPassword();
+		
+		String user = txtUsername.getText();
+		char[] charPass = passwordField.getPassword();
 		String pass = new String(charPass);
-		char[] charPass_1 = ((JPasswordField) password2).getPassword();
+		char[] charPass_1 = passwordField_1.getPassword();
 		String pass_1 = new String(charPass_1);
+		
 		
 		if(user.length() == 0 || pass.length() == 0 || pass_1.length() == 0)
 		{
@@ -217,6 +219,7 @@ public class RegPers1 extends JFrame {
 			JOptionPane.showMessageDialog(null, "ERROR: Le password non coincidono!");
 			return;
 		}
+		
 		int res = UtilityUtente.checkCorrettezzaCredenziali(user,pass);
 		if(res == 0);
 		else {
@@ -224,9 +227,10 @@ public class RegPers1 extends JFrame {
 			JOptionPane.showMessageDialog(null, "ERROR: Vincoli non rispettati!\nPremere su Info per controllare i vincoli.");
 			return;
 		}
-		
+		System.out.println("111111111");
 		try {
 			UtilityUtente.checkUtente(user,UtilityUtente.hashPwd(pass));
+			System.out.println("okokokokokok");
 		} catch (EasySoftException e) {
 			if(e.getMessage().equals(ErroriDB.USERNAME_NOT_FOUND)) { //Username valido
 				dispose();
@@ -244,6 +248,9 @@ public class RegPers1 extends JFrame {
 			return;
 		}
 		
+		setCursor(Cursor.getDefaultCursor());
+		JOptionPane.showMessageDialog(null, "ERROR: Username già in uso!");
+		return;
 	}
 
 }
