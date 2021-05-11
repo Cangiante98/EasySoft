@@ -30,8 +30,6 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 
 import Exception.EasySoftException;
-import Exception.ErroriDB;
-import database.TabellaComuni;
 import utente.*;
 
 @SuppressWarnings("rawtypes")
