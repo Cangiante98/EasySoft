@@ -227,7 +227,6 @@ public class RegPers1 extends JFrame {
 			JOptionPane.showMessageDialog(null, "ERROR: Vincoli non rispettati!\nPremere su Info per controllare i vincoli.");
 			return;
 		}
-		System.out.println("111111111");
 		try {
 			UtilityUtente.checkUtente(user,UtilityUtente.hashPwd(pass));
 			System.out.println("okokokokokok");

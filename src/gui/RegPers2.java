@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,15 +32,17 @@ import javax.swing.border.SoftBevelBorder;
 import Exception.EasySoftException;
 import Exception.ErroriDB;
 import database.TabellaComuni;
-import utente.Persona;
-import utente.UtilityUtente;
+import utente.*;
 
 @SuppressWarnings("rawtypes")
 public class RegPers2 extends JFrame{
 
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	private String username;
+	private String password;
+	
 	private JComboBox provincia;
 	private JComboBox comune;
 	private JTextField nome;
@@ -49,12 +52,18 @@ public class RegPers2 extends JFrame{
 	private JTextField numero;	
 	private JTextField via;
 	private JTextField civico;	
+	private JCheckBox chckbxSeiUnAmministratore;
+	
 	JPanel contentPane;
 	JTextField txtUsername;
 	JPasswordField passwordField;
 	
 	@SuppressWarnings("unchecked")
 	public RegPers2(String user, String pass , String[] listaProvince) throws SQLException {
+		
+		this.username = user;
+		this.password = pass;
+		
 		setSize(600, 460);
 		setLocationRelativeTo(null);
 		setUndecorated(true);
@@ -263,7 +272,7 @@ public class RegPers2 extends JFrame{
 		btnAggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-				checkRegistrati();
+				checkRegistrati(user,pass,listaProvince);
 			}
 		});
 		btnAggiungi.setForeground(Color.WHITE);
@@ -275,7 +284,8 @@ public class RegPers2 extends JFrame{
 		setVisible(true);
 	}
 	
-	public void checkRegistrati() {
+	@SuppressWarnings("unused")
+	public void checkRegistrati(String user, String pass , String[] listaProvince) {
 		String tmpNome = nome.getText();
 		String tmpCognome = cognome.getText();
 		String tmpdata = data.getText();
@@ -306,61 +316,73 @@ public class RegPers2 extends JFrame{
 			JOptionPane.showMessageDialog(null, "ERROR: Cognome non valido!");
 			return;
 		}
-		//try{
-		if(dateCheck(tmpdata) == 1) {
-			setCursor(Cursor.getDefaultCursor());
-			JOptionPane.showMessageDialog(null, "ERROR: Data di nascita non valida!");
-			return;
-		}
-		if(dateCheck(tmpdata) == 1) {
-			setCursor(Cursor.getDefaultCursor());
-			JOptionPane.showMessageDialog(null, "ERROR: Data di entrata non valida!");
-			return;
-		}
-		
-		//Convert string to date
-		SimpleDateFormat dataform = new SimpleDateFormat("dd/MM/yyyy");
-		Date dataNascita;
-		Date dataEntrata;			
 		try {
-			dataNascita = dataform.parse(tmpdata);
-		} catch (ParseException e) {
-			setCursor(Cursor.getDefaultCursor());
-			JOptionPane.showMessageDialog(null, "ERROR: Data di nascita non valida!");
-			return;
-		}
-					
-		Persona persona = new Persona(tmpNome,tmpCognome,tmpcf,tmpnum,tmpprovincia,tmpcomune,tmpvia,tmpcivico);
-		int res = UtilityUtente.checkPersona(persona);  //****DA IMPLEMENTARE in UtilityUtente****
-		switch(res) {
-			case 0: //Valido
-				break;
-			case 1:
-				setCursor(Cursor.getDefaultCursor());
-				JOptionPane.showMessageDialog(null, "ERROR: Nome non valido!");
-				return;
-			case 2:
-				setCursor(Cursor.getDefaultCursor());
-				JOptionPane.showMessageDialog(null, "ERROR: Cognome non valido!");
-				return;
-			case 3:
+			if(dateCheck(tmpdata) == 1) {
 				setCursor(Cursor.getDefaultCursor());
 				JOptionPane.showMessageDialog(null, "ERROR: Data di nascita non valida!");
 				return;
-			case 4:
+			}
+			if(dateCheck(tmpdata) == 1) {
 				setCursor(Cursor.getDefaultCursor());
 				JOptionPane.showMessageDialog(null, "ERROR: Data di entrata non valida!");
 				return;
-			case 5:
+			}
+			
+			//Convert string to date
+			SimpleDateFormat dataform = new SimpleDateFormat("dd/MM/yyyy");
+			Date dataNascita;		
+			try {
+				dataNascita = dataform.parse(tmpdata);
+			} catch (ParseException e) {
 				setCursor(Cursor.getDefaultCursor());
-				JOptionPane.showMessageDialog(null, "ERROR: Stipendio mensile non valido!");
+				JOptionPane.showMessageDialog(null, "ERROR: Data di nascita non valida!");
 				return;
-			case 6:
-				setCursor(Cursor.getDefaultCursor());
-				JOptionPane.showMessageDialog(null, "ERROR: Limite vendite annuo non valido!");
-				return;
+			}
+			
+			Persona persona = new Persona(tmpNome,tmpCognome,tmpcf,tmpnum,tmpprovincia,tmpcomune,tmpvia,tmpcivico);
+			int res = UtilityUtente.checkPersona(persona);
+			switch(res) {
+				case 0: //Valido
+					break;
+				case 1:
+					setCursor(Cursor.getDefaultCursor());
+					JOptionPane.showMessageDialog(null, "ERROR: Nome non valido!");
+					return;
+				case 2:
+					setCursor(Cursor.getDefaultCursor());
+					JOptionPane.showMessageDialog(null, "ERROR: Cognome non valido!");
+					return;
+				case 3:
+					setCursor(Cursor.getDefaultCursor());
+					JOptionPane.showMessageDialog(null, "ERROR: Data di nascita non valida!");
+					return;
+				case 4:
+					setCursor(Cursor.getDefaultCursor());
+					JOptionPane.showMessageDialog(null, "ERROR: Data di entrata non valida!");
+					return;
+				case 5:
+					setCursor(Cursor.getDefaultCursor());
+					JOptionPane.showMessageDialog(null, "ERROR: Stipendio mensile non valido!");
+					return;
+				case 6:
+					setCursor(Cursor.getDefaultCursor());
+					JOptionPane.showMessageDialog(null, "ERROR: Limite vendite annuo non valido!");
+					return;
+			}
+			
+			boolean admin = chckbxSeiUnAmministratore.isSelected();
+			Utente utente = new Utente(persona,username,UtilityUtente.hashPwd(password),admin);
+			utente.addUtente();
+			
+		} catch (EasySoftException e) {
+			setCursor(Cursor.getDefaultCursor());
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			return;
+		} catch (SQLException e) {
+			setCursor(Cursor.getDefaultCursor());
+			JOptionPane.showMessageDialog(null, "ERROR: Errore interno database!");
+			return;
 		}
-		
 	}
 	
 	// Valida una data in formato String.
