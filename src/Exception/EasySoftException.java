@@ -4,7 +4,7 @@ package Exception;
  * Classe che si occupa di gestire le eccezioni custom.<br>
  * La classe AziendaException estende la classe Exception e
  * ne reimplementa alcuni metodi costruttori secondo le specifiche.
- * @author matteo
+ * @author marco
  * @version 1.1
  */
 public class EasySoftException extends Exception {

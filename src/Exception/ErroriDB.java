@@ -7,7 +7,7 @@ package Exception;
  * quali avranno come parametro il messaggio di errore relativo al tipo di eccezione.
  * Queste eccezioni potranno essere lanciate dalla classe ProxyDB durante le operazioni
  * di accesso al database, mentre verranno gestite nella classe HomePage o nella classe Client.
- * @author matteo
+ * @author marco
  * @version 1.1
  */
 public class ErroriDB {
