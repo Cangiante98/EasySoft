@@ -143,7 +143,7 @@ public class RegPers1 extends JFrame {
 		lblpass.setBounds(251, 147, 155, 15);
 		contentPane.add(lblpass);
 		
-		JLabel lblpass2 = new JLabel("Inserisci password:");
+		JLabel lblpass2 = new JLabel("Reinserisci password:");
 		lblpass2.setFont(new Font("Dialog", Font.ITALIC, 15));
 		lblpass2.setBounds(251, 212, 155, 15);
 		contentPane.add(lblpass2);

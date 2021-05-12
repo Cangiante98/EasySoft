@@ -132,7 +132,7 @@ public class RegLab1 extends JFrame{
 		lblregistrazione.setBounds(260, 18, 155, 15);
 		contentPane.add(lblregistrazione);
 		
-		JLabel lblUsername = new JLabel("Inserisci username:");
+		JLabel lblUsername = new JLabel("partita IVA:");
 		lblUsername.setFont(new Font("Dialog", Font.ITALIC, 15));
 		lblUsername.setBounds(251, 82, 155, 15);
 		contentPane.add(lblUsername);
@@ -142,7 +142,7 @@ public class RegLab1 extends JFrame{
 		lblpass.setBounds(251, 147, 155, 15);
 		contentPane.add(lblpass);
 		
-		JLabel lblpass2 = new JLabel("Inserisci password:");
+		JLabel lblpass2 = new JLabel("Reinserisci password:");
 		lblpass2.setFont(new Font("Dialog", Font.ITALIC, 15));
 		lblpass2.setBounds(251, 212, 155, 15);
 		contentPane.add(lblpass2);
