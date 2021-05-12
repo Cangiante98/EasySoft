@@ -100,7 +100,7 @@ public class TipoReg extends JFrame {
 		panel.add(button1);
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				new RegLab1(listaProvince);
 			}
 		});
 		// persona
@@ -134,7 +134,7 @@ public class TipoReg extends JFrame {
 		contentPane.add(button3);
 		button3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				new RegMed1(listaProvince);
 			}
 		});
 		
