@@ -172,7 +172,12 @@ public class RegPers1 extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-				checkreg(listaProvince);
+				try {
+					checkreg(listaProvince);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_1.setForeground(new Color(255, 255, 255));
@@ -198,7 +203,7 @@ public class RegPers1 extends JFrame {
 		setVisible(true);
 	}
 	
-	public void checkreg(String listaProvince[]) {
+	public void checkreg(String listaProvince[]) throws SQLException {
 		
 		String user = txtUsername.getText();
 		char[] charPass = passwordField.getPassword();
@@ -229,14 +234,22 @@ public class RegPers1 extends JFrame {
 			return;
 		}
 		
-		/*boolean trovato = TabellaUtente.cercaUtenteInTabella(user);
+		boolean usertrovato = TabellaUtente.cercaUtenteInTabella(user);
 		
-		if(trovato == true)
-			System.out.println("Trovato");
-		else
-			System.out.println("Non trovato");
-		*/
-		try {
+		if(usertrovato == true) {
+			setCursor(Cursor.getDefaultCursor());
+			JOptionPane.showMessageDialog(null, "ERROR: Username gi‡† in uso!");
+		}
+		if(usertrovato == false) {
+			dispose();
+			try {
+				new RegPers2(user,pass,listaProvince);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		/*try {
 			System.out.println("ENTRATO!!!!!");
 			UtilityUtente.checkUtente(user,UtilityUtente.hashPwd(pass));
 			System.out.println("USCITO!!!!!");
@@ -262,10 +275,7 @@ public class RegPers1 extends JFrame {
 			setCursor(Cursor.getDefaultCursor());
 			JOptionPane.showMessageDialog(null, "ERROR: Errore interno database!");
 			return;
-		}
-		
-		setCursor(Cursor.getDefaultCursor());
-		JOptionPane.showMessageDialog(null, "ERROR: Username gi√† in uso!");
+		}*/
 		
 		return;
 	}

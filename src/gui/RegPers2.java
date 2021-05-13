@@ -31,6 +31,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.xml.crypto.Data;
 
 import Exception.EasySoftException;
+import database.TabellaComuni;
 import utente.*;
 
 @SuppressWarnings("rawtypes")
@@ -46,7 +47,6 @@ public class RegPers2 extends JFrame{
 	private JComboBox comune;
 	private JTextField nome;
 	private JTextField cognome;
-	private JTextField data;
 	private JTextField cf;
 	private JTextField numero;	
 	private JTextField via;
@@ -128,19 +128,14 @@ public class RegPers2 extends JFrame{
 		cognome.setBounds(20, 165, 190, 30);
 		panelloscrollabile.add(cognome);
 		
-		data = new JTextField();
-		data.setColumns(10);
-		data.setBounds(20, 230, 190, 30);
-		panelloscrollabile.add(data);
-		
 		cf = new JTextField();
 		cf.setColumns(10);
-		cf.setBounds(20, 295, 190, 30);
+		cf.setBounds(20, 230, 190, 30);
 		panelloscrollabile.add(cf);
 		
 		numero = new JTextField();
 		numero.setColumns(10);
-		numero.setBounds(20, 555, 190, 30);
+		numero.setBounds(20, 425, 190, 30);
 		panelloscrollabile.add(numero);
 		
 		via= new JTextField();
@@ -150,18 +145,19 @@ public class RegPers2 extends JFrame{
 		
 		civico = new JTextField();
 		civico.setColumns(10);
-		civico.setBounds(215, 490, 30, 30);
+		civico.setBounds(215, 425, 30, 30);
 		panelloscrollabile.add(civico);
 		
 		
 		
 		// SETTAGGIO LISTE PROVINCIE E COMUNI		
 		provincia = new JComboBox(listaProvince);
-		provincia.setBounds(20, 360, 190, 30);
+		provincia.setBounds(20, 295, 190, 30);
 		panelloscrollabile.add(provincia);
 		
-		comune = new JComboBox(listaProvince);
-		comune.setBounds(20, 425, 190, 30);
+		//System.out.println(provincia.getSelectedItem().toString());
+		comune = new JComboBox(TabellaComuni.caricaComuni(provincia.getSelectedItem().toString()));
+		comune.setBounds(20, 360, 190, 30);
 		panelloscrollabile.add(comune);
 		
 		//Testo
@@ -185,17 +181,6 @@ public class RegPers2 extends JFrame{
 		cognome.setHorizontalTextPosition(SwingConstants.LEFT);
 		cognome.setVerticalTextPosition(JLabel.TOP);
 		panelloscrollabile.add(cognome);
-
-		//Testo
-		JLabel data = new JLabel("data di nascita");
-		data.setHorizontalAlignment(SwingConstants.LEFT);
-		data.setBackground(new Color(0, 0, 139));
-		data.setFont(new Font("Dialog", Font.ITALIC, 15));
-		data.setForeground(Color.BLACK);
-		data.setBounds(20, 203, 162, 29);
-		data.setHorizontalTextPosition(SwingConstants.LEFT);
-		data.setVerticalTextPosition(JLabel.TOP);
-		panelloscrollabile.add(data);
 		
 		//Testo
 		JLabel cf = new JLabel("codice fiscale");
@@ -203,7 +188,7 @@ public class RegPers2 extends JFrame{
 		cf.setBackground(new Color(0, 0, 139));
 		cf.setFont(new Font("Dialog", Font.ITALIC, 15));
 		cf.setForeground(Color.BLACK);
-		cf.setBounds(20, 268, 162, 29);
+		cf.setBounds(20, 203, 162, 29);
 		cf.setHorizontalTextPosition(SwingConstants.LEFT);
 		cf.setVerticalTextPosition(JLabel.TOP);
 		panelloscrollabile.add(cf);
@@ -214,7 +199,7 @@ public class RegPers2 extends JFrame{
 		provincia.setBackground(new Color(0, 0, 139));
 		provincia.setFont(new Font("Dialog", Font.ITALIC, 15));
 		provincia.setForeground(Color.BLACK);
-		provincia.setBounds(20, 333, 162, 29);
+		provincia.setBounds(20, 268, 162, 29);
 		provincia.setHorizontalTextPosition(SwingConstants.LEFT);
 		provincia.setVerticalTextPosition(JLabel.TOP);
 		panelloscrollabile.add(provincia);
@@ -225,7 +210,7 @@ public class RegPers2 extends JFrame{
 		comune.setBackground(new Color(0, 0, 139));
 		comune.setFont(new Font("Dialog", Font.ITALIC, 15));
 		comune.setForeground(Color.BLACK);
-		comune.setBounds(20, 401, 162, 29);
+		comune.setBounds(20, 336, 162, 29);
 		comune.setHorizontalTextPosition(SwingConstants.LEFT);
 		comune.setVerticalTextPosition(JLabel.TOP);
 		panelloscrollabile.add(comune);
@@ -237,7 +222,7 @@ public class RegPers2 extends JFrame{
 		via.setBackground(new Color(0, 0, 139));
 		via.setFont(new Font("Dialog", Font.ITALIC, 15));
 		via.setForeground(Color.BLACK);
-		via.setBounds(20, 466, 162, 29);
+		via.setBounds(20, 401, 162, 29);
 		via.setHorizontalTextPosition(SwingConstants.LEFT);
 		via.setVerticalTextPosition(JLabel.TOP);
 		panelloscrollabile.add(via);
@@ -248,7 +233,7 @@ public class RegPers2 extends JFrame{
 		civico.setBackground(new Color(0, 0, 139));
 		civico.setFont(new Font("Dialog", Font.ITALIC, 15));
 		civico.setForeground(Color.BLACK);
-		civico.setBounds(215, 466, 162, 29);
+		civico.setBounds(215, 401, 162, 29);
 		civico.setHorizontalTextPosition(SwingConstants.LEFT);
 		civico.setVerticalTextPosition(JLabel.TOP);
 		panelloscrollabile.add(civico);
@@ -259,7 +244,7 @@ public class RegPers2 extends JFrame{
 		tel.setBackground(new Color(0, 0, 139));
 		tel.setFont(new Font("Dialog", Font.ITALIC, 15));
 		tel.setForeground(Color.BLACK);
-		tel.setBounds(20, 528, 162, 29);
+		tel.setBounds(20, 463, 162, 29);
 		tel.setHorizontalTextPosition(SwingConstants.LEFT);
 		tel.setVerticalTextPosition(JLabel.TOP);
 		panelloscrollabile.add(tel);
@@ -277,7 +262,7 @@ public class RegPers2 extends JFrame{
 		btnAggiungi.setForeground(Color.WHITE);
 		btnAggiungi.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnAggiungi.setBackground(new Color(0, 153, 51));
-		btnAggiungi.setBounds(18, 690, 450, 25);
+		btnAggiungi.setBounds(18, 625, 450, 25);
 		panelloscrollabile.add(btnAggiungi);
 		
 		setVisible(true);
@@ -289,13 +274,13 @@ public class RegPers2 extends JFrame{
 		String tmpCognome = cognome.getText();
 		String tmpcf = cf.getText();
 		String tmpnum = numero.getText();
-		String tmpcomune= comune.getName();
-		String tmpprovincia= comune.getName();
+		String tmpcomune= comune.getSelectedItem().toString();
+		String tmpprovincia= provincia.getSelectedItem().toString();
 		String tmpvia= via.getName();
 		String tmpcivico= civico.getName();
 		
 		if(tmpNome.length() == 0 || tmpCognome.length() == 0 || tmpcf.length() == 0
-				|| tmpnum.length() == 0 || tmpcomune.length() == 0 || tmpprovincia.length() == 0 || tmpcivico.length() ==0|| tmpvia.length()==0)
+				|| tmpnum.length() == 0 || tmpprovincia.length() == 0 || tmpcomune.length() == 0 || tmpcivico.length() ==0|| tmpvia.length()==0)
 		{
 			setCursor(Cursor.getDefaultCursor());
 			JOptionPane.showMessageDialog(null, "ERROR: Alcuni campi sono vuoti!");
