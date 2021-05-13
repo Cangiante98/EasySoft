@@ -20,10 +20,14 @@ public class TabellaPersona {
 			
 			// stringa contenete i comandi SQL
 			String comandoSQL ="CREATE TABLE IF NOT EXISTS Persona ("
-									+ "CodiceFiscale 	CHAR(10) PRIMARY KEY, "
+									+ "CodiceFiscale 	CHAR(16) PRIMARY KEY, "
 									+ "Nome		  	VARCHAR(20) NOT NULL, "
 									+ "Cognome		VARCHAR(20) NOT NULL, "
-									+ "Telefono		CHAR(12) NOT NULL "
+									+ "Provincia	VARCHAR(30) NOT NULL, "
+									+ "Comune		VARCHAR(30) NOT NULL, "
+									+ "Via		 	VARCHAR(30) NOT NULL, "
+									+ "Civico		CHAR(4) NOT NULL, "
+									+ "Username		VARCHAR(30) NOT NULL "
 									+ ");";
 		
 			
@@ -59,11 +63,16 @@ public class TabellaPersona {
 			Persona persona = personaInserita; 
 			
 			
-			String comandoSQL = "INSERT INTO Persona(CodiceFiscale,Nome,Cognome,Telefono) "
+			String comandoSQL = "INSERT INTO Persona(CodiceFiscale,Nome,Cognome,Telefono,Pronvicia,Comune,Via,Civico,Username) "
 									+ "VALUES ('"+ persona.getCodiceFiscale() + "','" 
 												+ persona.getNome() + "','"
 												+ persona.getCognome() + "','"
-												+ persona.getTelefono() + "')";
+												+ persona.getTelefono() + "','"
+												+ persona.getProvincia()+ "','"
+												+ persona.getComune() + "','"
+												+ persona.getVia() + "','"
+												+ persona.getCivico() + "','"
+												+ persona.getUsername() + "')";
 			
 		
 			Statement istruzione = conn.createStatement();
