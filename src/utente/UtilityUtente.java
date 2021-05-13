@@ -27,8 +27,10 @@ public class UtilityUtente {
 	public static void checkUtente(String username, String hashPassword) throws SQLException,EasySoftException {
 		LogIn_SignIn login = (LogIn_SignIn) ProxyDB.getIstance();
 		login.checkUtente(username,hashPassword);
-		Token.getIstance().setHashPassword(hashPassword);
+		//Token.getIstance().setHashPassword(hashPassword);
 	}
+	
+	
 	/**
 	 * Controlla la correttezza del formato di username e password.<p>
 	 * Vincoli username:

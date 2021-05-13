@@ -24,6 +24,7 @@ import javax.swing.border.SoftBevelBorder;
 
 import Exception.EasySoftException;
 import Exception.ErroriDB;
+import database.TabellaUtente;
 import utente.UtilityUtente;
 
 public class RegPers1 extends JFrame {
@@ -227,9 +228,25 @@ public class RegPers1 extends JFrame {
 			JOptionPane.showMessageDialog(null, "ERROR: Vincoli non rispettati!\nPremere su Info per controllare i vincoli.");
 			return;
 		}
+		
+		/*boolean trovato = TabellaUtente.cercaUtenteInTabella(user);
+		
+		if(trovato == true)
+			System.out.println("Trovato");
+		else
+			System.out.println("Non trovato");
+		*/
 		try {
+			System.out.println("ENTRATO!!!!!");
 			UtilityUtente.checkUtente(user,UtilityUtente.hashPwd(pass));
-			System.out.println("okokokokokok");
+			System.out.println("USCITO!!!!!");
+			boolean trovato = TabellaUtente.cercaUtenteInTabella(user);
+			
+			if(trovato == true)
+				System.out.println("Trovato");
+			else
+				System.out.println("Non trovato");
+			
 		} catch (EasySoftException e) {
 			if(e.getMessage().equals(ErroriDB.USERNAME_NOT_FOUND)) { //Username valido
 				dispose();
@@ -249,6 +266,7 @@ public class RegPers1 extends JFrame {
 		
 		setCursor(Cursor.getDefaultCursor());
 		JOptionPane.showMessageDialog(null, "ERROR: Username già in uso!");
+		
 		return;
 	}
 
