@@ -1,4 +1,4 @@
-package utente;
+pacpackage utente;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -83,7 +83,10 @@ public class UtilityUtente {
 	public static int checkPersona(Persona persona) {
 		if(checkNome(persona.getNome()) == false)	return 1;
 		if(checkNome(persona.getCognome()) == false)	return 2;
-		if(/*DA IMPLEMENTARE*/checkCodiceFiscale(persona.getCodiceFiscale()) == false)	return 3;
+		if(checkDataNascita(persona.getData())== false ) return 3;
+		if(/*DA IMPLEMENTARE*/checkCodiceFiscale(persona.getCodiceFiscale()) == false)	return 4;
+		if(checkVia(persona.getVia())==false) return 5;
+		if(checkcivico(persona.getCivico())==false) return 6;
 		return 0; //Valido
 	}
 	/**
@@ -122,6 +125,49 @@ public class UtilityUtente {
 		//da implementare
 		//lunghezza consentita 16 caratteri
 		//controlli sulla posizione delle lettere e dei numeri
+	}
+	
+	/**
+	 * Controllo correttezza semantica data di nascita.<br>
+	 * L'impiegato deve essere maggiorenne per poter lavorare in azienda. 
+	 * @param dataNascita Data di nascita.
+	 * @return
+	 * 		TRUE - Data corretta.<br>
+	 * 		FALSE - Data non corretta.
+	 * @see Calendar#add(int, int)
+	 * @see Calendar#getTime()
+	 * @see Date#compareTo(Date)
+	 */
+	private static boolean checkDataNascita(Date dataNascita) {
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.YEAR,-18); //Possono lavorare solo maggiorenni
+		Date temp = c.getTime();
+		if(dataNascita.compareTo(temp) > 0)	return false;
+		return true;
+	}
+	
+	private static boolean checkVia(String via) {
+		if(via == null)	return false;
+		int leng = via.length();
+		if(leng > 30) return false;
+		for(int i=0; i<leng; i++) {
+			if(Character.isLetter(via.charAt(i)) == false)
+					return false;
+		}
+		return true;
+	}
+	
+	private static boolean checkcivico(String civico) {
+		if(civico == null) return false;
+		int leng = civico.length();
+		if(leng >4) return false;
+		for (int i =0; i<leng; i++) {
+			if(Pattern.matches("[.,;:_+/*^=?!()\\[\\]{}@%#$-]+", civico) == false) {
+				i=leng;
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**

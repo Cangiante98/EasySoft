@@ -28,6 +28,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.xml.crypto.Data;
 
 import Exception.EasySoftException;
 import utente.*;
@@ -337,7 +338,7 @@ public class RegPers2 extends JFrame{
 				return;
 			}
 			
-			Persona persona = new Persona(tmpNome,tmpCognome,tmpcf,tmpnum,tmpprovincia,tmpcomune,tmpvia,tmpcivico);
+			Persona persona = new Persona(tmpNome,tmpCognome,tmpcf,tmpnum,tmpprovincia,(java.sql.Date) dataNascita,tmpcomune,tmpvia,tmpcivico,user);
 			int res = UtilityUtente.checkPersona(persona);
 			switch(res) {
 				case 0: //Valido

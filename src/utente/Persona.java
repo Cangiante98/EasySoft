@@ -1,6 +1,7 @@
 package utente;
 
-import javax.xml.crypto.Data;
+import java.sql.Date;
+
 
 public class Persona{
 	private String nome; 			//max 20 caratteri
@@ -8,7 +9,7 @@ public class Persona{
 	private String codiceFiscale;	//esattamente 16 caratteri
 	private String telefono;		//esattamente 10 caratteri
 	private String provincia;
-	private Data data;
+	private Date data;
 	private String comune;
 	private String via;
 	private String civico;
@@ -16,8 +17,7 @@ public class Persona{
 	
 	
 	
-	
-	public Persona(String nome, String cognome, String codiceFiscale, String telefono, String provincia, Data data,
+	public Persona(String nome, String cognome, String codiceFiscale, String telefono, String provincia, Date data,
 			String comune, String via, String civico, String username) {
 		super();
 		this.nome = nome;
@@ -61,10 +61,10 @@ public class Persona{
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
 	}
-	public Data getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(Data data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 	public String getComune() {
@@ -93,7 +93,6 @@ public class Persona{
 	}
 	
 	
-	
-	
-	
 }
+	
+	
