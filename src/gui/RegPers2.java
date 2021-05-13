@@ -287,7 +287,6 @@ public class RegPers2 extends JFrame{
 	public void checkRegistrati(String user, String pass , String[] listaProvince) {
 		String tmpNome = nome.getText();
 		String tmpCognome = cognome.getText();
-		String tmpdata = data.getText();
 		String tmpcf = cf.getText();
 		String tmpnum = numero.getText();
 		String tmpcomune= comune.getName();
@@ -295,7 +294,7 @@ public class RegPers2 extends JFrame{
 		String tmpvia= via.getName();
 		String tmpcivico= civico.getName();
 		
-		if(tmpNome.length() == 0 || tmpCognome.length() == 0 || tmpdata.length() == 0 || tmpcf.length() == 0
+		if(tmpNome.length() == 0 || tmpCognome.length() == 0 || tmpcf.length() == 0
 				|| tmpnum.length() == 0 || tmpcomune.length() == 0 || tmpprovincia.length() == 0 || tmpcivico.length() ==0|| tmpvia.length()==0)
 		{
 			setCursor(Cursor.getDefaultCursor());
@@ -316,29 +315,8 @@ public class RegPers2 extends JFrame{
 			return;
 		}
 		try {
-			if(dateCheck(tmpdata) == 1) {
-				setCursor(Cursor.getDefaultCursor());
-				JOptionPane.showMessageDialog(null, "ERROR: Data di nascita non valida!");
-				return;
-			}
-			if(dateCheck(tmpdata) == 1) {
-				setCursor(Cursor.getDefaultCursor());
-				JOptionPane.showMessageDialog(null, "ERROR: Data di entrata non valida!");
-				return;
-			}
-			
-			//Convert string to date
-			SimpleDateFormat dataform = new SimpleDateFormat("dd/MM/yyyy");
-			Date dataNascita;		
-			try {
-				dataNascita = dataform.parse(tmpdata);
-			} catch (ParseException e) {
-				setCursor(Cursor.getDefaultCursor());
-				JOptionPane.showMessageDialog(null, "ERROR: Data di nascita non valida!");
-				return;
-			}
-			
-			Persona persona = new Persona(tmpNome,tmpCognome,tmpcf,tmpnum,tmpprovincia,(java.sql.Date) dataNascita,tmpcomune,tmpvia,tmpcivico,user);
+						
+			Persona persona = new Persona(tmpNome,tmpCognome,tmpcf,tmpnum,tmpprovincia,tmpcomune,tmpvia,tmpcivico,user);
 			int res = UtilityUtente.checkPersona(persona);
 			switch(res) {
 				case 0: //Valido
@@ -385,6 +363,7 @@ public class RegPers2 extends JFrame{
 	}
 	
 	// Valida una data in formato String.
+	@SuppressWarnings("unused")
 	private int dateCheck(String data) {
 		int lista_giorni[] = {31,28,31,30,31,30,31,31,30,31,30,31};
 

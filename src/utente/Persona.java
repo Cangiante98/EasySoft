@@ -1,6 +1,7 @@
 package utente;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 
 public class Persona{
@@ -9,7 +10,6 @@ public class Persona{
 	private String codiceFiscale;	//esattamente 16 caratteri
 	private String telefono;		//esattamente 10 caratteri
 	private String provincia;
-	private Date data;
 	private String comune;
 	private String via;
 	private String civico;
@@ -17,20 +17,19 @@ public class Persona{
 	
 	
 	
-	public Persona(String nome, String cognome, String codiceFiscale, String telefono, String provincia, Date data,
-			String comune, String via, String civico, String username) {
-		super();
+	public Persona(String nome, String cognome, String codiceFiscale, String telefono, String provincia, String comune,
+			String via, String civico, String username) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.codiceFiscale = codiceFiscale;
 		this.telefono = telefono;
 		this.provincia = provincia;
-		this.data = data;
 		this.comune = comune;
 		this.via = via;
 		this.civico = civico;
 		this.username = username;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -61,12 +60,6 @@ public class Persona{
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
 	}
-	public Date getData() {
-		return data;
-	}
-	public void setData(Date data) {
-		this.data = data;
-	}
 	public String getComune() {
 		return comune;
 	}
@@ -91,8 +84,14 @@ public class Persona{
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	@Override
+	public String toString() {
+		return "Persona [nome=" + nome + ", cognome=" + cognome + ", codiceFiscale=" + codiceFiscale + ", telefono="
+				+ telefono + ", provincia=" + provincia + ", comune=" + comune + ", via=" + via + ", civico=" + civico
+				+ ", username=" + username + "]";
+	}
+	
 	
 	
 }
-	
-	

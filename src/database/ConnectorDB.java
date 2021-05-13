@@ -14,7 +14,7 @@ public class ConnectorDB {
 	/** Stringa di connessione contenente il path del database. */
 	private static String url = "jdbc:mysql://localhost/dbTamponi";
 	private static String username = "root";
-	private static String password = "123456";
+	private static String password = "Mysqljhonny1998";
 	
 	/**
 	 * Metodo statico che si occupa di aprire una connessione verso il database.
