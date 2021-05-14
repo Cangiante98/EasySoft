@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -36,7 +37,6 @@ import utente.*;
 
 @SuppressWarnings("rawtypes")
 public class RegPers2 extends JFrame{
-
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -155,10 +155,23 @@ public class RegPers2 extends JFrame{
 		provincia.setBounds(20, 295, 190, 30);
 		panelloscrollabile.add(provincia);
 		
-		//System.out.println(provincia.getSelectedItem().toString());
-		comune = new JComboBox(TabellaComuni.caricaComuni(provincia.getSelectedItem().toString()));
+	
+		comune = new JComboBox(new String[]{"Nessuna selezione"});
 		comune.setBounds(20, 360, 190, 30);
 		panelloscrollabile.add(comune);
+		
+		// Ascoltatore che si attiva quando l'utente sceglie una provincia.
+		// Prende la provincia scelta e carica tutti i comuni per quella provincia e li inserisce nella tendina comune.
+		provincia.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	String provinciaScelta = provincia.getSelectedItem().toString(); // provincia scelta nella tendina province
+            	String listaComuni[] = TabellaComuni.caricaComuni(provinciaScelta); // carica la lista di comuni della provincia scelta
+            	comune.setModel(new DefaultComboBoxModel<String>(listaComuni)); // inserisce i comuni nella tendina comuni
+            	}
+            });
+	
 		
 		//Testo
 		JLabel nome = new JLabel("nome");
@@ -384,4 +397,3 @@ public class RegPers2 extends JFrame{
 		return 0; //Valida
 	}
 }
-
