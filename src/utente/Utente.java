@@ -12,7 +12,6 @@ public class Utente {
 	private String username = null;
 	private String hashPassword= null;
 	
-	private boolean adminFlag = false;
 	
 	/**
 	 * Costruttore parametrico.<br>
@@ -23,24 +22,23 @@ public class Utente {
 	 * @param adminFlag Flag che indica se l'utente è un amministratore o meno.
 	 * @see Utility_Utente#hashPwd(String)
 	 */
-	public Utente(Persona persona, String username, String hashPassword, boolean adminFlag) {
-		this.persona = persona;
-		this.username = username;
-		this.adminFlag = adminFlag;
-		this.hashPassword = hashPassword;
-	}
 	
-	public Utente(Medico persona, String username, String hashPassword, boolean adminFlag, Medico medico) {
+	public Utente(Medico medico, String username, String hashPassword) {
 		this.medico = medico;
 		this.username = username;
-		this.adminFlag = adminFlag;
 		this.hashPassword = hashPassword;
 	}
 	
-	public Utente(LabAnalisi lab_analisi, String username, String hashPassword, boolean adminFlag) {
+	public Utente(Persona persona, String username, String hashPassword) {
+		super();
+		this.persona = persona;
+		this.username = username;
+		this.hashPassword = hashPassword;
+	}
+
+	public Utente(LabAnalisi lab_analisi, String username, String hashPassword) {
 		this.lab_analisi = lab_analisi;
 		this.username = username;
-		this.adminFlag = adminFlag;
 		this.hashPassword = hashPassword;
 	}
 
@@ -63,10 +61,6 @@ public class Utente {
 	public String getHashPassword() {
 		return hashPassword;
 	}
-
-	public boolean isAdmin() {
-		return adminFlag;
-	}
 	
 	/**
 	 * Aggiunge l'utente nella base dati.<br>
@@ -79,9 +73,9 @@ public class Utente {
 	 * @see it.uniba.di.prog2.cs2021.gruppo31.database.LogIn_SignIn
 	 * @see it.uniba.di.prog2.cs2021.gruppo31.database.ProxyDB#addUtente(Utente)
 	 */
-	public void addUtente() throws SQLException,EasySoftException {
+	public void addUtente_Persona() throws SQLException,EasySoftException {
 		LogIn_SignIn login =ProxyDB.getIstance();
-		login.addUtente(this);
+		login.addUtente_Persona(this);
 	}
 	
 }

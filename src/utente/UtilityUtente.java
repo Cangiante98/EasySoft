@@ -83,10 +83,9 @@ public class UtilityUtente {
 	public static int checkPersona(Persona persona) {
 		if(checkNome(persona.getNome()) == false)	return 1;
 		if(checkNome(persona.getCognome()) == false)	return 2;
-		if(checkDataNascita(persona.getData())== false ) return 3;
-		if(/*DA IMPLEMENTARE*/checkCodiceFiscale(persona.getCodiceFiscale()) == false)	return 4;
-		if(checkVia(persona.getVia())==false) return 5;
-		if(checkcivico(persona.getCivico())==false) return 6;
+		if(checkCodiceFiscale(persona.getCodiceFiscale()) == false)	return 3;
+		if(checkVia(persona.getVia()) == false) return 4;
+		if(checkCivico(persona.getCivico()) == false) return 5;
 		return 0; //Valido
 	}
 	/**
@@ -120,7 +119,11 @@ public class UtilityUtente {
 	 * @see Date#compareTo(Date)
 	 */
 	private static boolean checkCodiceFiscale(String codicefiscale) {
-		return false;
+		if(codicefiscale == null)	return false;
+		int leng = codicefiscale.length();
+		if(leng>16) return false;
+		
+		return true;
 		
 		//da implementare
 		//lunghezza consentita 16 caratteri
@@ -146,7 +149,7 @@ public class UtilityUtente {
 		return true;
 	}
 	
-	private static boolean checkVia(String via) {
+	private static boolean checkVia(String via)  {
 		if(via == null)	return false;
 		int leng = via.length();
 		if(leng > 30) return false;
@@ -157,12 +160,12 @@ public class UtilityUtente {
 		return true;
 	}
 	
-	private static boolean checkcivico(String civico) {
-		if(civico == null) return false;
+	private static boolean checkCivico(String civico) {
+		if(civico == null)  return false;
 		int leng = civico.length();
-		if(leng >4) return false;
+		if(leng > 6)		return false;
 		for (int i =0; i<leng; i++) {
-			if(Pattern.matches("[.,;:_+/*^=?!()\\[\\]{}@%#$-]+", civico) == false) {
+			if(Pattern.matches("[.,;:_+/*^=?!()\\[\\]{}@%#$-]+", civico) == true) {
 				i=leng;
 				return false;
 			}

@@ -135,12 +135,12 @@ public class RegPers2 extends JFrame{
 		
 		numero = new JTextField();
 		numero.setColumns(10);
-		numero.setBounds(20, 425, 190, 30);
+		numero.setBounds(20, 490, 190, 30);
 		panelloscrollabile.add(numero);
 		
 		via= new JTextField();
 		via.setColumns(10);
-		via.setBounds(20, 490, 190, 30);
+		via.setBounds(20, 425, 190, 30);
 		panelloscrollabile.add(via);
 		
 		civico = new JTextField();
@@ -289,8 +289,8 @@ public class RegPers2 extends JFrame{
 		String tmpnum = numero.getText();
 		String tmpcomune= comune.getSelectedItem().toString();
 		String tmpprovincia= provincia.getSelectedItem().toString();
-		String tmpvia= via.getName();
-		String tmpcivico= civico.getName();
+		String tmpvia= via.getText();
+		String tmpcivico= civico.getText();
 		
 		if(tmpNome.length() == 0 || tmpCognome.length() == 0 || tmpcf.length() == 0
 				|| tmpnum.length() == 0 || tmpprovincia.length() == 0 || tmpcomune.length() == 0 || tmpcivico.length() ==0|| tmpvia.length()==0)
@@ -312,10 +312,11 @@ public class RegPers2 extends JFrame{
 			JOptionPane.showMessageDialog(null, "ERROR: Cognome non valido!");
 			return;
 		}
-		try {
-						
-			Persona persona = new Persona(tmpNome,tmpCognome,tmpcf,tmpnum,tmpprovincia,tmpcomune,tmpvia,tmpcivico,user);
+		try {	
+			Persona persona = new Persona(tmpNome,tmpCognome,tmpcf,tmpnum,tmpprovincia,tmpcomune,tmpcivico,tmpvia,user);
 			int res = UtilityUtente.checkPersona(persona);
+			System.out.println(persona.getVia()+" "+ persona.getCivico());
+			
 			switch(res) {
 				case 0: //Valido
 					break;
@@ -329,25 +330,21 @@ public class RegPers2 extends JFrame{
 					return;
 				case 3:
 					setCursor(Cursor.getDefaultCursor());
-					JOptionPane.showMessageDialog(null, "ERROR: Data di nascita non valida!");
+					JOptionPane.showMessageDialog(null, "ERROR:  Codice Fiscale non valido!");
 					return;
 				case 4:
 					setCursor(Cursor.getDefaultCursor());
-					JOptionPane.showMessageDialog(null, "ERROR: Data di entrata non valida!");
+					JOptionPane.showMessageDialog(null, "ERROR: Via non valida");
 					return;
 				case 5:
 					setCursor(Cursor.getDefaultCursor());
-					JOptionPane.showMessageDialog(null, "ERROR: Stipendio mensile non valido!");
-					return;
-				case 6:
-					setCursor(Cursor.getDefaultCursor());
-					JOptionPane.showMessageDialog(null, "ERROR: Limite vendite annuo non valido!");
+					JOptionPane.showMessageDialog(null, "ERROR:civico non valido");
 					return;
 			}
 			
-			boolean admin = chckbxSeiUnAmministratore.isSelected();
-			Utente utente = new Utente(persona,username,UtilityUtente.hashPwd(password),admin);
-			utente.addUtente();
+
+			Utente utente = new Utente(persona,username,UtilityUtente.hashPwd(password));
+			utente.addUtente_Persona();
 			
 		} catch (EasySoftException e) {
 			setCursor(Cursor.getDefaultCursor());

@@ -43,7 +43,7 @@ public interface LogIn_SignIn {
 	 * @see it.uniba.di.prog2.cs2021.gruppo31.utente.Impiegato
 	 * @see ConnectorDB
 	 */
-	public void addUtente(Utente utente) throws SQLException,EasySoftException;
+	public void addUtente_Persona(Utente persona) throws SQLException,EasySoftException;
 	
 	/**
 	 * Restituisce un utente memorizzato nel database.<br>
