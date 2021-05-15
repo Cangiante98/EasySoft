@@ -36,7 +36,6 @@ public class LogIn_Window extends JFrame{
 	
 	public static void main(String[] args) {
 		listaProvince = TabellaComuni.caricaProvince();
-	
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

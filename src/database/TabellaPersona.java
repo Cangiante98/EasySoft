@@ -27,6 +27,7 @@ public class TabellaPersona {
 									+ "Comune		VARCHAR(30) NOT NULL, "
 									+ "Via		 	VARCHAR(30) NOT NULL, "
 									+ "Civico		CHAR(4) NOT NULL, "
+									+ "Numero		CHAR(4) NOT NULL, "
 									+ "Username		VARCHAR(30) NOT NULL "
 									+ ");";
 		

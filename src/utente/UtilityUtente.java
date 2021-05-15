@@ -86,6 +86,7 @@ public class UtilityUtente {
 		if(checkCodiceFiscale(persona.getCodiceFiscale()) == false)	return 3;
 		if(checkVia(persona.getVia()) == false) return 4;
 		if(checkCivico(persona.getCivico()) == false) return 5;
+		if(checknum(persona.getTelefono())== false) return 6;
 		return 0; //Valido
 	}
 	/**
@@ -121,13 +122,25 @@ public class UtilityUtente {
 	private static boolean checkCodiceFiscale(String codicefiscale) {
 		if(codicefiscale == null)	return false;
 		int leng = codicefiscale.length();
-		if(leng>16) return false;
+		if(leng != 16) return false;
 		
+		for(int i =0; i==5; i++) {
+			if (Character.isLetter(codicefiscale.charAt(i) )== false) return false;
+		}
+		for(int i=5; i==7;i++) {
+			if (Character.isLetter(codicefiscale.charAt(i) )== true) return false;
+		}
+		if (Character.isLetter(codicefiscale.charAt(8) )== false) return false;
+		for(int i =9; i==10; i++) {
+			if (Character.isLetter(codicefiscale.charAt(i) )== true) return false;
+		}
+		if (Character.isLetter(codicefiscale.charAt(11) )== false) return false;
+		for(int i =12; i==14; i++) {
+			if (Character.isLetter(codicefiscale.charAt(i) )== true) return false;
+		}
+		if (Character.isLetter(codicefiscale.charAt(15) )== false) return false;
 		return true;
 		
-		//da implementare
-		//lunghezza consentita 16 caratteri
-		//controlli sulla posizione delle lettere e dei numeri
 	}
 	
 	/**
@@ -172,7 +185,18 @@ public class UtilityUtente {
 		}
 		return true;
 	}
-	
+	 private static boolean checknum(String telefono) {
+		 if(telefono == null) return false;
+		 int leng=telefono.length();
+		 if(leng < 9 || leng>10) return false;
+		 for(int i=0;i<leng;i++) {
+			 if(Pattern.matches("[.,;:_+/*^=?!()\\[\\]{}@%#$-]+", telefono) == true || Character.isLetter(telefono.charAt(i)) == true) {
+				 i=leng;
+				 return false;
+			 }
+		 }
+		return true;
+	 }
 	/**
 	 * Genera l'hash della password fornita in input.<br>
 	 * L'hash generato è sempre un numero positivo: <code> (password.hashCode() &amp; 0xfffffff) </code>

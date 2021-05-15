@@ -67,15 +67,19 @@ public class ProxyDB implements LogIn_SignIn,AdminQuery {
 	 * {@inheritDoc}
 	 */
 	public void addUtente_Persona(Utente utente) throws SQLException,EasySoftException{
-		query = "INSERT INTO PERSONA(NOME,COGNOME,CODICEFISCALE,TELEFONO) VALUES (?,?,?,?);";
+		query = "INSERT INTO PERSONA(NOME,COGNOME,CODICEFISCALE,TELEFONO,PROVINCIA,COMUNE,CIVICO,VIA,USERNAME) VALUES (?,?,?,?,?,?,?,?,?);";
 		connector = ConnectorDB.connect();
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		PreparedStatement ps = connector.prepareStatement(query);
 		
 		ps.setString(1,utente.getPersona().getNome());
 		ps.setString(2,utente.getPersona().getCognome());
 		ps.setString(3,utente.getPersona().getCodiceFiscale());
 		ps.setString(4,utente.getPersona().getTelefono());
+		ps.setString(5,utente.getPersona().getProvincia());
+		ps.setString(6,utente.getPersona().getComune());
+		ps.setString(7,utente.getPersona().getCivico());
+		ps.setString(8,utente.getPersona().getVia());
+		ps.setString(9,utente.getPersona().getUsername());
 		
 		try {
 			ps.executeUpdate();
@@ -90,12 +94,11 @@ public class ProxyDB implements LogIn_SignIn,AdminQuery {
 		ResultSet rs = ps.executeQuery();
 		int lastID = rs.getInt(1);
 		
-		query = "INSERT INTO UTENTE VALUES (?,?,?,?);";
+		query = "INSERT INTO UTENTE VALUES (?,?,?);";
 		ps = connector.prepareStatement(query);
 		ps.setString(1,utente.getUsername());
 		ps.setString(2,utente.getHashPassword());
-		ps.setBoolean(3,utente.isAdmin());
-		ps.setInt(4,lastID);
+		ps.setInt(3,lastID);
 		
 		try {
 			ps.executeUpdate();

@@ -33,6 +33,7 @@ import javax.xml.crypto.Data;
 
 import Exception.EasySoftException;
 import database.TabellaComuni;
+import database.TabellaPersona;
 import utente.*;
 
 @SuppressWarnings("rawtypes")
@@ -269,7 +270,15 @@ public class RegPers2 extends JFrame{
 		btnAggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-				checkRegistrati(user,pass,listaProvince);
+				try {
+					checkRegistrati(user,pass,listaProvince);
+				} catch (EasySoftException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnAggiungi.setForeground(Color.WHITE);
@@ -282,7 +291,7 @@ public class RegPers2 extends JFrame{
 	}
 	
 	@SuppressWarnings("unused")
-	public void checkRegistrati(String user, String pass , String[] listaProvince) {
+	public void checkRegistrati(String user, String pass , String[] listaProvince) throws EasySoftException, SQLException {
 		String tmpNome = nome.getText();
 		String tmpCognome = cognome.getText();
 		String tmpcf = cf.getText();
@@ -312,49 +321,47 @@ public class RegPers2 extends JFrame{
 			JOptionPane.showMessageDialog(null, "ERROR: Cognome non valido!");
 			return;
 		}
-		try {	
-			Persona persona = new Persona(tmpNome,tmpCognome,tmpcf,tmpnum,tmpprovincia,tmpcomune,tmpcivico,tmpvia,user);
-			int res = UtilityUtente.checkPersona(persona);
-			System.out.println(persona.getVia()+" "+ persona.getCivico());
-			
-			switch(res) {
-				case 0: //Valido
-					break;
-				case 1:
-					setCursor(Cursor.getDefaultCursor());
-					JOptionPane.showMessageDialog(null, "ERROR: Nome non valido!");
-					return;
-				case 2:
-					setCursor(Cursor.getDefaultCursor());
-					JOptionPane.showMessageDialog(null, "ERROR: Cognome non valido!");
-					return;
-				case 3:
-					setCursor(Cursor.getDefaultCursor());
-					JOptionPane.showMessageDialog(null, "ERROR:  Codice Fiscale non valido!");
-					return;
-				case 4:
-					setCursor(Cursor.getDefaultCursor());
-					JOptionPane.showMessageDialog(null, "ERROR: Via non valida");
-					return;
-				case 5:
-					setCursor(Cursor.getDefaultCursor());
-					JOptionPane.showMessageDialog(null, "ERROR:civico non valido");
-					return;
-			}
-			
-
-			Utente utente = new Utente(persona,username,UtilityUtente.hashPwd(password));
-			utente.addUtente_Persona();
-			
-		} catch (EasySoftException e) {
-			setCursor(Cursor.getDefaultCursor());
-			JOptionPane.showMessageDialog(null, e.getMessage());
-			return;
-		} catch (SQLException e) {
-			setCursor(Cursor.getDefaultCursor());
-			JOptionPane.showMessageDialog(null, "ERROR: Errore interno database!");
-			return;
+		Persona persona = new Persona(tmpNome,tmpCognome,tmpcf,tmpnum,tmpprovincia,tmpcomune,tmpcivico,tmpvia,user);
+		int res = UtilityUtente.checkPersona(persona);
+		
+		switch(res) {
+			case 0: //Valido
+				break;
+			case 1:
+				setCursor(Cursor.getDefaultCursor());
+				JOptionPane.showMessageDialog(null, "ERROR: Nome non valido!");
+				return;
+			case 2:
+				setCursor(Cursor.getDefaultCursor());
+				JOptionPane.showMessageDialog(null, "ERROR: Cognome non valido!");
+				return;
+			case 3:
+				setCursor(Cursor.getDefaultCursor());
+				JOptionPane.showMessageDialog(null, "ERROR:  Codice Fiscale non valido!");
+				return;
+			case 4:
+				setCursor(Cursor.getDefaultCursor());
+				JOptionPane.showMessageDialog(null, "ERROR: Via non valida");
+				return;
+			case 5:
+				setCursor(Cursor.getDefaultCursor());
+				JOptionPane.showMessageDialog(null, "ERROR:civico non valido");
+				return;
+			case 6:
+				setCursor(Cursor.getDefaultCursor());
+				JOptionPane.showMessageDialog(null, "ERROR:numero non valido");
+				return;
 		}
+		
+		/* da IMPLEMENTARE LA REGISTRAZIONE DELLA PERSONA*/
+		
+		Utente utente = new Utente(persona,username,UtilityUtente.hashPwd(password));
+		//utente.addUtente_Persona();
+		TabellaPersona.inserisciPersonaInTabella(persona);
+		setCursor(Cursor.getDefaultCursor());
+		JOptionPane.showInternalMessageDialog(null, "Registrazione avvenuta con successo! ", "perfect", JOptionPane.PLAIN_MESSAGE);
+		dispose();
+		new LogIn_Window();
 	}
 	
 	// Valida una data in formato String.
