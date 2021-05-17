@@ -1,12 +1,15 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import utente.Persona;
 
 public class TabellaMediciAutorizzati {
+	
+	
 	private static Connection conn = null;
 	
 	public static void creaTabellaMediciAutorizzati() {
@@ -66,6 +69,44 @@ public class TabellaMediciAutorizzati {
 		
 		return verificaInserimento;
 	}
-
-	
+	public static boolean cercaMedicoAutorizzatoInTabella(String codice) {
+		boolean trovato = false;
+		try {
+			// caricamento del driver
+			new com.mysql.cj.jdbc.Driver();
+		
+			// crea una connessione al database "dbTamponi" usando credenziali di accesso appropriate.
+			conn = ConnectorDB.connect();
+			
+			// stringa contenete i comandi SQL
+			// chiede il numero di persona che hanno questo codice fiscale
+			// perciò sarà 0 oppure 1
+			String comandoSQL = "SELECT COUNT(*) "
+					      + "FROM MediciAutorizzati "
+					      + "WHERE Codice = '" + codice + "';";
+			
+			//esegue il comando SQL
+			Statement istruzione = conn.createStatement();
+			ResultSet risultato= istruzione.executeQuery(comandoSQL);
+			
+			
+			String stringaTrovata = null;
+			
+			//se viene trovato un medico con codice fiscale uguale sarà "1" altrimenti "0" (in string)
+			while(risultato.next()) {
+			 stringaTrovata = risultato.getString(1);
+			}
+			
+			trovato = stringaTrovata.equals("1");// "trovato" sarà true se la stringa è "1", altrimenti false 
+			//vvvdfvdfv
+			// chiude connessione database
+			ConnectorDB.close(conn);
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return trovato;
+	}
 }
