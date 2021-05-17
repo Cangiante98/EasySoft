@@ -32,9 +32,8 @@ import javax.swing.border.SoftBevelBorder;
 import javax.xml.crypto.Data;
 
 import Exception.EasySoftException;
-import database.TabellaComuni;
-import database.TabellaPersona;
-import database.TabellaUtente;
+import database.ComandiSQLTabelle;
+import database.OperazioniTabellaDB;
 import utente.*;
 
 @SuppressWarnings("rawtypes")
@@ -169,7 +168,7 @@ public class RegPers2 extends JFrame{
             public void actionPerformed(ActionEvent e) {
             	
             	String provinciaScelta = provincia.getSelectedItem().toString(); // provincia scelta nella tendina province
-            	String listaComuni[] = TabellaComuni.caricaComuni(provinciaScelta); // carica la lista di comuni della provincia scelta
+            	String listaComuni[] = OperazioniTabellaDB.caricaComuni(provinciaScelta);// carica la lista di comuni della provincia scelta
             	comune.setModel(new DefaultComboBoxModel<String>(listaComuni)); // inserisce i comuni nella tendina comuni
             	}
             });
@@ -354,24 +353,24 @@ public class RegPers2 extends JFrame{
 				return;
 		}
 		
-		//crea utente della persoa fisica
+		//crea utente della persona fisica
 		Utente utente = new Utente(persona,username,UtilityUtente.hashPwd(password));
 		
-		//inserisce l'utente (username e password ) nella taebella Utente
-		int risulInserUtente = TabellaUtente.inserisciUtenteInTabella(utente);
+		//inserisce l'utente nella taebella Utente e controlla inserimento 
+		int controllaInserUtente = OperazioniTabellaDB.inserisciRigaInTabella(ComandiSQLTabelle.inserisciUtente(utente));
 		
 		// controlla il corretto inserimento dell'utente nella tabella
-		if(risulInserUtente == 1)
+		if(controllaInserUtente == 1)
 			System.out.println("Utente inserito correttamente nella tabella 'Utente'");
 		else
 			System.out.println("Errore inserimento utente in tabella 'Utente'");
 	
 		//inserisce la persona nella taebella Persona
-		int risultInserPersona = TabellaPersona.inserisciPersonaInTabella(persona);
-
+		int controllaInserPersona = OperazioniTabellaDB.inserisciRigaInTabella(ComandiSQLTabelle.inserisciPersona(persona));
+		
 		String messRisultatoInserimento; // messaggio che verrà visualizzato nell'interfaccia
 		// controlla il corretto inserimento della persona nella tabella
-		if(risultInserPersona == 1)
+		if(controllaInserPersona == 1)
 			messRisultatoInserimento = "Registrazione avvenuta con successo!";
 		else
 			messRisultatoInserimento = "Ci scusiamo si è verificato un errore!Riprova";

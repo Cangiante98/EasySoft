@@ -32,9 +32,8 @@ import javax.swing.border.SoftBevelBorder;
 import javax.xml.crypto.Data;
 
 import Exception.EasySoftException;
-import database.TabellaComuni;
-import database.TabellaPersona;
-import database.TabellaUtente;
+import database.ComandiSQLTabelle;
+import database.OperazioniTabellaDB;
 import utente.*;
 
 @SuppressWarnings("rawtypes")
@@ -175,7 +174,8 @@ public class RegMed2 extends JFrame{
             public void actionPerformed(ActionEvent e) {
             	
             	String provinciaScelta = provincia.getSelectedItem().toString(); // provincia scelta nella tendina province
-            	String listaComuni[] = TabellaComuni.caricaComuni(provinciaScelta); // carica la lista di comuni della provincia scelta
+            	String listaComuni[] = OperazioniTabellaDB.caricaComuni(provinciaScelta);// carica la lista di comuni della provincia scelta
+            	
             	comune.setModel(new DefaultComboBoxModel<String>(listaComuni)); // inserisce i comuni nella tendina comuni
             	}
             });
@@ -375,7 +375,7 @@ public class RegMed2 extends JFrame{
 		Utente utente = new Utente(persona,username,UtilityUtente.hashPwd(password));
 		
 		//inserisce l'utente (username e password ) nella taebella Utente
-		int risulInserUtente = TabellaUtente.inserisciUtenteInTabella(utente);
+		int risulInserUtente = OperazioniTabellaDB.inserisciRigaInTabella(ComandiSQLTabelle.inserisciUtente(utente));
 		
 		// controlla il corretto inserimento dell'utente nella tabella
 		if(risulInserUtente == 1)
@@ -384,7 +384,7 @@ public class RegMed2 extends JFrame{
 			System.out.println("Errore inserimento utente in tabella 'Utente'");
 	
 		//inserisce la persona nella taebella Persona
-		int risultInserPersona = TabellaPersona.inserisciPersonaInTabella(persona);
+		int risultInserPersona = OperazioniTabellaDB.inserisciRigaInTabella(ComandiSQLTabelle.inserisciPersona(persona));
 
 		String messRisultatoInserimento; // messaggio che verrà visualizzato nell'interfaccia
 		// controlla il corretto inserimento della persona nella tabella

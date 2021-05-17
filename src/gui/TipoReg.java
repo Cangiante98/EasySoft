@@ -23,9 +23,6 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import database.TabellaComuni;
-
-
 public class TipoReg extends JFrame {
 	
 	/**

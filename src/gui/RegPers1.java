@@ -24,7 +24,8 @@ import javax.swing.border.SoftBevelBorder;
 
 import Exception.EasySoftException;
 import Exception.ErroriDB;
-import database.TabellaUtente;
+import database.ComandiSQLTabelle;
+import database.OperazioniTabellaDB;
 import utente.UtilityUtente;
 
 public class RegPers1 extends JFrame {
@@ -234,7 +235,7 @@ public class RegPers1 extends JFrame {
 			return;
 		}
 		
-		boolean usertrovato = TabellaUtente.cercaUtenteInTabella(user);
+		boolean usertrovato = OperazioniTabellaDB.cercaInTabella(ComandiSQLTabelle.ricercaUtente(user));
 		
 		if(usertrovato == true) {
 			setCursor(Cursor.getDefaultCursor());

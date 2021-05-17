@@ -21,7 +21,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import database.TabellaComuni;
+import database.OperazioniTabellaDB;
 
 public class LogIn_Window extends JFrame{
 	private static String listaProvince[];// conterrà le province caricate dal db
@@ -35,7 +35,7 @@ public class LogIn_Window extends JFrame{
 	JPasswordField passwordField;
 	
 	public static void main(String[] args) {
-		listaProvince = TabellaComuni.caricaProvince();
+		listaProvince = OperazioniTabellaDB.caricaProvince();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

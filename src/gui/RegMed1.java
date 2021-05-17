@@ -24,7 +24,8 @@ import javax.swing.border.SoftBevelBorder;
 
 import Exception.EasySoftException;
 import Exception.ErroriDB;
-import database.TabellaUtente;
+import database.ComandiSQLTabelle;
+import database.OperazioniTabellaDB;
 import utente.UtilityUtente;
 
 public class RegMed1 extends JFrame {
@@ -234,7 +235,7 @@ public void checkreg(String listaProvince[]) throws SQLException {
 			return;
 		}
 		
-		boolean usertrovato = TabellaUtente.cercaUtenteInTabella(user);
+		boolean usertrovato = OperazioniTabellaDB.cercaInTabella(ComandiSQLTabelle.ricercaUtente(user));
 		
 		if(usertrovato == true) {
 			setCursor(Cursor.getDefaultCursor());
