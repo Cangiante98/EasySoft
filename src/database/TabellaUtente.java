@@ -74,7 +74,7 @@ public class TabellaUtente {
 			conn = ConnectorDB.connect();
 			
 		
-			String comandoSQL = "INSERT INTO Persona(Username,Password) "
+			String comandoSQL = "INSERT INTO Utente(Username,Password) "
 									+ "VALUES ('"+ utenteInserito.getUsername() + "','" 
 												+ utenteInserito.getHashPassword() + "')";
 			

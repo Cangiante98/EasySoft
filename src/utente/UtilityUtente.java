@@ -167,8 +167,8 @@ public class UtilityUtente {
 		int leng = via.length();
 		if(leng > 30) return false;
 		for(int i=0; i<leng; i++) {
-			if(Character.isLetter(via.charAt(i)) == false)
-					return false;
+			if(Character.isLetter(via.charAt(i)) == false  && Character.isSpaceChar(via.charAt(i)) == false)
+				return false;
 		}
 		return true;
 	}

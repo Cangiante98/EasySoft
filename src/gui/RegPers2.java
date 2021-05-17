@@ -34,6 +34,7 @@ import javax.xml.crypto.Data;
 import Exception.EasySoftException;
 import database.TabellaComuni;
 import database.TabellaPersona;
+import database.TabellaUtente;
 import utente.*;
 
 @SuppressWarnings("rawtypes")
@@ -353,13 +354,31 @@ public class RegPers2 extends JFrame{
 				return;
 		}
 		
-		/* da IMPLEMENTARE LA REGISTRAZIONE DELLA PERSONA*/
-		
+		//crea utente della persoa fisica
 		Utente utente = new Utente(persona,username,UtilityUtente.hashPwd(password));
-		//utente.addUtente_Persona();
-		TabellaPersona.inserisciPersonaInTabella(persona);
+		
+		//inserisce l'utente (username e password ) nella taebella Utente
+		int risulInserUtente = TabellaUtente.inserisciUtenteInTabella(utente);
+		
+		// controlla il corretto inserimento dell'utente nella tabella
+		if(risulInserUtente == 1)
+			System.out.println("Utente inserito correttamente nella tabella 'Utente'");
+		else
+			System.out.println("Errore inserimento utente in tabella 'Utente'");
+	
+		//inserisce la persona nella taebella Persona
+		int risultInserPersona = TabellaPersona.inserisciPersonaInTabella(persona);
+
+		String messRisultatoInserimento; // messaggio che verrà visualizzato nell'interfaccia
+		// controlla il corretto inserimento della persona nella tabella
+		if(risultInserPersona == 1)
+			messRisultatoInserimento = "Registrazione avvenuta con successo!";
+		else
+			messRisultatoInserimento = "Ci scusiamo si è verificato un errore!Riprova";
+	
+		
 		setCursor(Cursor.getDefaultCursor());
-		JOptionPane.showInternalMessageDialog(null, "Registrazione avvenuta con successo! ", "perfect", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showInternalMessageDialog(null, messRisultatoInserimento, "perfect", JOptionPane.PLAIN_MESSAGE);
 		dispose();
 		new LogIn_Window();
 	}

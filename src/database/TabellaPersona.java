@@ -21,13 +21,13 @@ public class TabellaPersona {
 			// stringa contenete i comandi SQL
 			String comandoSQL ="CREATE TABLE IF NOT EXISTS Persona ("
 									+ "CodiceFiscale 	CHAR(16) PRIMARY KEY, "
-									+ "Nome		  	VARCHAR(20) NOT NULL, "
-									+ "Cognome		VARCHAR(20) NOT NULL, "
-									+ "Provincia	VARCHAR(30) NOT NULL, "
-									+ "Comune		VARCHAR(30) NOT NULL, "
-									+ "Via		 	VARCHAR(30) NOT NULL, "
-									+ "Civico		CHAR(4) NOT NULL, "
-									+ "Numero		CHAR(4) NOT NULL, "
+									+ "Nome		  	VARCHAR(30) NOT NULL, "
+									+ "Cognome		VARCHAR(30) NOT NULL, "
+									+ "Telefono		CHAR(13) NOT NULL, "
+									+ "Provincia	VARCHAR(40) NOT NULL, "
+									+ "Comune		VARCHAR(40) NOT NULL, "
+									+ "Via		 	VARCHAR(40) NOT NULL, "
+									+ "Civico		VARCHAR(4) NOT NULL, "
 									+ "Username		VARCHAR(30) NOT NULL "
 									+ ");";
 		
@@ -64,11 +64,11 @@ public class TabellaPersona {
 			Persona persona = personaInserita; 
 			
 			
-			String comandoSQL = "INSERT INTO Persona(CodiceFiscale,Nome,Cognome,Telefono,Pronvicia,Comune,Via,Civico,Username) "
+			String comandoSQL = "INSERT INTO Persona(CodiceFiscale,Nome,Cognome,Telefono,Provincia,Comune,Via,Civico,Username) "
 									+ "VALUES ('"+ persona.getCodiceFiscale() + "','" 
 												+ persona.getNome() + "','"
 												+ persona.getCognome() + "','"
-												+ persona.getTelefono() + "','"
+												+ "+39" + persona.getTelefono() + "','"
 												+ persona.getProvincia()+ "','"
 												+ persona.getComune() + "','"
 												+ persona.getVia() + "','"
@@ -82,7 +82,7 @@ public class TabellaPersona {
 			verificaInserimento = istruzione.executeUpdate(comandoSQL);
 			
 			// chiude connessione database
-						ConnectorDB.close(conn);
+			ConnectorDB.close(conn);
 			
 		}
 		catch (SQLException e) {
