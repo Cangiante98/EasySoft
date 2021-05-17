@@ -16,7 +16,7 @@ public class HomePage {
 		String user = "nome utente";
 		String pass= "password0";
 		
-		TabellaMedico.creaTabellaMedico();
+		
 		
 		System.out.println(TabellaComuni.caricaComuni("Bari"));
 		/*try {
