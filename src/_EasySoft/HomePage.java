@@ -6,6 +6,7 @@ import javax.swing.JComboBox;
 
 import Exception.EasySoftException;
 import database.TabellaComuni;
+import database.TabellaMedico;
 import database.TabellaPersona;
 import utente.UtilityUtente;
 
@@ -15,6 +16,7 @@ public class HomePage {
 		String user = "nome utente";
 		String pass= "password0";
 		
+		TabellaMedico.creaTabellaMedico();
 		
 		System.out.println(TabellaComuni.caricaComuni("Bari"));
 		/*try {

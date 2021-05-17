@@ -171,7 +171,12 @@ public class RegMed1 extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-				checkreg(listaProvince);
+				try {
+					checkreg(listaProvince);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_1.setForeground(new Color(255, 255, 255));
@@ -197,7 +202,7 @@ public class RegMed1 extends JFrame {
 		setVisible(true);
 	}
 	
-	public void checkreg(String listaProvince[]) {
+	public void checkreg(String listaProvince[]) throws SQLException {
 		
 		String user = txtUsername.getText();
 		char[] charPass = passwordField.getPassword();
@@ -234,11 +239,7 @@ public class RegMed1 extends JFrame {
 			if(e.getMessage().equals(ErroriDB.USERNAME_NOT_FOUND)) { //Username valido
 				dispose();
 				setCursor(Cursor.getDefaultCursor());
-				try {
-					new RegPers2(user,pass,listaProvince);
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				new RegMed2(user,pass,listaProvince);  
 				return;
 			}
 		} catch (Exception e) {
