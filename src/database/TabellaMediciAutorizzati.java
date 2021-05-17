@@ -20,7 +20,7 @@ public class TabellaMediciAutorizzati {
 			
 			// stringa contenete i comandi SQL
 			String comandoSQL ="CREATE TABLE IF NOT EXISTS MediciAutorizzati ("
-									+ "CodiceFiscale 	VARCHAR(30) PRIMARY KEY"
+									+ "Codice 	VARCHAR(30) PRIMARY KEY"
 									+ ");";
 		
 			
