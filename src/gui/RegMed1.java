@@ -24,6 +24,7 @@ import javax.swing.border.SoftBevelBorder;
 
 import Exception.EasySoftException;
 import Exception.ErroriDB;
+import database.TabellaUtente;
 import utente.UtilityUtente;
 
 public class RegMed1 extends JFrame {
@@ -202,7 +203,7 @@ public class RegMed1 extends JFrame {
 		setVisible(true);
 	}
 	
-	public void checkreg(String listaProvince[]) throws SQLException {
+public void checkreg(String listaProvince[]) throws SQLException {
 		
 		String user = txtUsername.getText();
 		char[] charPass = passwordField.getPassword();
@@ -232,25 +233,22 @@ public class RegMed1 extends JFrame {
 			JOptionPane.showMessageDialog(null, "ERROR: Vincoli non rispettati!\nPremere su Info per controllare i vincoli.");
 			return;
 		}
-		try {
-			UtilityUtente.checkUtente(user,UtilityUtente.hashPwd(pass));
-			System.out.println("okokokokokok");
-		} catch (EasySoftException e) {
-			if(e.getMessage().equals(ErroriDB.USERNAME_NOT_FOUND)) { //Username valido
-				dispose();
-				setCursor(Cursor.getDefaultCursor());
-				new RegMed2(user,pass,listaProvince);  
-				return;
-			}
-		} catch (Exception e) {
+		
+		boolean usertrovato = TabellaUtente.cercaUtenteInTabella(user);
+		
+		if(usertrovato == true) {
 			setCursor(Cursor.getDefaultCursor());
-			JOptionPane.showMessageDialog(null, "ERROR: Errore interno database!");
-			return;
+			JOptionPane.showMessageDialog(null, "ERROR: Username gi‡† in uso!");
+		}
+		if(usertrovato == false) {
+			dispose();
+			try {
+				new RegMed2(user,pass,listaProvince);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
-		setCursor(Cursor.getDefaultCursor());
-		JOptionPane.showMessageDialog(null, "ERROR: Username gi√† in uso!");
 		return;
 	}
-
 }

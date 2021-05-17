@@ -45,6 +45,7 @@ public class RegMed2 extends JFrame{
 	private String username;
 	private String password;
 	
+	private JTextField codice;
 	private JComboBox provincia;
 	private JComboBox comune;
 	private JTextField nome;
@@ -120,6 +121,11 @@ public class RegMed2 extends JFrame{
 		scrollPane.setViewportView(panelloscrollabile);
 		
 		// SETTO LE TENDINE INPUT
+		codice = new JTextField();
+		codice.setColumns(10);
+		codice.setBounds(250,100, 120, 30);
+		panelloscrollabile.add(codice);
+		
 		nome = new JTextField();
 		nome.setColumns(10);
 		nome.setBounds(20, 100, 190, 30);
@@ -176,6 +182,17 @@ public class RegMed2 extends JFrame{
 	
 		
 		//Testo
+		
+		JLabel cod = new JLabel("cod autorizzazione medico");
+		cod.setHorizontalAlignment(SwingConstants.LEFT);
+		cod.setBackground(new Color(0, 0, 139));
+		cod.setFont(new Font("Dialog", Font.ITALIC, 12));
+		cod.setForeground(Color.BLACK);
+		cod.setBounds(250, 75, 162, 29);
+		cod.setHorizontalTextPosition(SwingConstants.LEFT);
+		cod.setVerticalTextPosition(JLabel.TOP);
+		panelloscrollabile.add(cod);
+		
 		JLabel nome = new JLabel("nome");
 		nome.setHorizontalAlignment(SwingConstants.LEFT);
 		nome.setBackground(new Color(0, 0, 139));

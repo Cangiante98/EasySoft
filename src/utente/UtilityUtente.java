@@ -27,7 +27,7 @@ public class UtilityUtente {
 	public static void checkUtente(String username, String hashPassword) throws SQLException,EasySoftException {
 		LogIn_SignIn login = (LogIn_SignIn) ProxyDB.getIstance();
 		login.checkUtente(username,hashPassword);
-		//Token.getIstance().setHashPassword(hashPassword);
+		Token.getIstance().setHashPassword(hashPassword);
 	}
 	
 	
