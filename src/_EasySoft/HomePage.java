@@ -1,14 +1,7 @@
 package _EasySoft;
 
-import java.sql.SQLException;
-
-import javax.swing.JComboBox;
-
-import Exception.EasySoftException;
 import database.TabellaComuni;
-import database.TabellaMedico;
-import database.TabellaPersona;
-import utente.UtilityUtente;
+import database.TabellaMediciAutorizzati;
 
 public class HomePage {
 
@@ -16,7 +9,10 @@ public class HomePage {
 		String user = "nome utente";
 		String pass= "password0";
 		
-		TabellaMedico.creaTabellaMedico();
+		TabellaMediciAutorizzati.inserisciMedicoAutorizzatoInTabella("ac4a64so");
+		TabellaMediciAutorizzati.inserisciMedicoAutorizzatoInTabella("iuyt64so");
+		TabellaMediciAutorizzati.inserisciMedicoAutorizzatoInTabella("ac‡Ëouso");
+		TabellaMediciAutorizzati.inserisciMedicoAutorizzatoInTabella("ac4aeewq2");
 		
 		System.out.println(TabellaComuni.caricaComuni("Bari"));
 		/*try {

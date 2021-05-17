@@ -146,7 +146,7 @@ public class ProxyDB implements LogIn_SignIn,AdminQuery {
 		ps = connector.prepareStatement(query);
 		ps.setString(1,utente.getUsername());
 		ps.setString(2,utente.getHashPassword());
-		ps.setBoolean(3,utente.isAdmin());
+		//ps.setBoolean(3,utente.isAdmin());
 		ps.setInt(4,lastID);
 		
 		try {
@@ -196,7 +196,7 @@ public class ProxyDB implements LogIn_SignIn,AdminQuery {
 		ps = connector.prepareStatement(query);
 		ps.setString(1,utente.getUsername());
 		ps.setString(2,utente.getHashPassword());
-		ps.setBoolean(3,utente.isAdmin());
+		//ps.setBoolean(3,utente.isAdmin());
 		ps.setInt(4,lastID);
 		
 		try {
@@ -213,12 +213,6 @@ public class ProxyDB implements LogIn_SignIn,AdminQuery {
 		}
 		ps.close();
 		ConnectorDB.close(connector);
-	}
-
-	@Override
-	public void addUtente(Utente utente) throws SQLException, EasySoftException {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
