@@ -20,11 +20,17 @@ public class TabellaMedico {
 			
 			// stringa contenete i comandi SQL
 			String comandoSQL ="CREATE TABLE IF NOT EXISTS Medico ("
-									+ "CodiceFiscale 	CHAR(10) PRIMARY KEY, "
-									+ "Nome		  	VARCHAR(20) NOT NULL, "
-									+ "Cognome		VARCHAR(20) NOT NULL, "
-									+ "Telefono		CHAR(12) NOT NULL "
-									+ ");";
+											+ "Codice		  	VARCHAR(30) PRIMARY KEY, "
+											+ "CodiceFiscale 	CHAR(16) NOT NULL, "
+											+ "Nome		  	VARCHAR(30) NOT NULL, "
+											+ "Cognome		VARCHAR(30) NOT NULL, "
+											+ "Telefono		CHAR(13) NOT NULL, "
+											+ "Provincia	VARCHAR(40) NOT NULL, "
+											+ "Comune		VARCHAR(40) NOT NULL, "
+											+ "Via		 	VARCHAR(40) NOT NULL, "
+											+ "Civico		VARCHAR(4) NOT NULL, "
+											+ "Username		VARCHAR(30) NOT NULL "
+											+ ");";
 		
 			
 			Statement istruzione = conn.createStatement();
@@ -59,11 +65,18 @@ public class TabellaMedico {
 			Medico medico = medicoInserito; 
 			
 			
-			String comandoSQL = "INSERT INTO Medico(CodiceFiscale,Nome,Cognome,Telefono) "
-									+ "VALUES ('"+ medico.getCodiceFiscale() + "','" 
-												+ medico.getNome() + "','"
-												+ medico.getCognome() + "','"
-												+ medico.getTelefono() + "')";
+			String comandoSQL = "INSERT INTO Medico(Codice,CodiceFiscale,Nome,Cognome,Telefono,Provincia,Comune,Via,Civico,Username) "
+										+ "VALUES ('"
+										+ medico.getCodice() + "','" 
+										+ medico.getCodiceFiscale() + "','" 
+										+ medico.getNome() + "','"
+										+ medico.getCognome() + "','"
+										+ "+39" + medico.getTelefono() + "','"
+										+ medico.getProvincia()+ "','"
+										+ medico.getComune() + "','"
+										+ medico.getVia() + "','"
+										+ medico.getCivico() + "','"
+										+ medico.getUsername() + "')";
 			
 		
 			Statement istruzione = conn.createStatement();
@@ -83,11 +96,11 @@ public class TabellaMedico {
 	}
 	
 	/**
-	 * Cerca il medico con codicefiscale del parametro. Se lo trova ritorna true altrimenti false
-	 * @param codiceFiscale
+	 * Cerca il medico con codice del parametro. Se lo trova ritorna true altrimenti false
+	 * @param codice
 	 * @return
 	 */
-	public static boolean cercaMedicoInTabella(String codiceFiscale) {
+	public static boolean cercaMedicoInTabella(String codice) {
 		boolean trovato = false;
 		try {
 			// caricamento del driver
@@ -101,7 +114,7 @@ public class TabellaMedico {
 			// perciò sarà 0 oppure 1
 			String comandoSQL = "SELECT COUNT(*) "
 					      + "FROM Medico "
-					      + "WHERE CodiceFiscale = '" + codiceFiscale + "';";
+					      + "WHERE Codice = '" + codice + "';";
 			
 			//esegue il comando SQL
 			Statement istruzione = conn.createStatement();
